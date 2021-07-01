@@ -1,6 +1,7 @@
 const { Client, Collection } = require("discord.js");
 const config = require("./config.json");
 const fs = require("fs");
+const moment = require('moment');
 
 const client = new Client({
 disableEveryone: true
@@ -16,7 +17,7 @@ client.on('ready', () => {
   client.user.setActivity(config.activity); 
 });
 client.on("message", async message => {
-    console.log(`[${new Date(Date.now())}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`)
+    console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
     const prefix = (config.prefix);
     if (message.author.bot) return;
     if (!message.guild) return;
