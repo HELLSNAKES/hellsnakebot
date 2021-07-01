@@ -1,0 +1,25 @@
+{
+  "name": "hellsnake-bot",
+  "version": "1.0.0",
+  "description": "'-'",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HELLSNAKES/hellsnake-bot.git"
+  },
+  "keywords": [
+    "hellsnakebot"
+  ],
+  "author": "HELLSNAKE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HELLSNAKES/hellsnake-bot/issues"
+  },
+  "homepage": "https://github.com/HELLSNAKES/hellsnake-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
