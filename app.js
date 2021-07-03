@@ -4,8 +4,8 @@ if (!fs.existsSync('./config.json')) {
   console.log("config.json doesn't exists. Attemping to create a new one...")
   fs.writeFileSync('./config.json', `{
     "token": "",
-    "activity": "hellsnakebot|!help",
-    "prefix": "!",
+    "activity": "",
+    "prefix": "",
     "Admin": ""
   }`)
 }
