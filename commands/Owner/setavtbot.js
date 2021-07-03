@@ -3,7 +3,7 @@ const { Admin } = require('../../config.json');
 const client = new Discord.Client()
 
 module.exports = {
-    name: "setavatartbot",
+    name: "setavatarbot",
     category: "Owner",
     description: "Set avatar bot",
     usage: "[command +url]",
@@ -11,7 +11,7 @@ module.exports = {
    let avatarurl = args.join(" ");
    if(message.author.id !== Admin) return message.channel.send('Insufficient permission!!')
    client.user.setAvatar(`${avatarurl}`)
-   if (!avatarurl) return message.channel.send(`Usage: setavtbot <url>`)
+   if (!avatarurl) return message.channel.send(`Usage: setavatarbot <url>`)
    let embed = new Discord.MessageEmbed()
        .setTitle('New Avatar Set')
        .setImage(`${avatarurl}`)
