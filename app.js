@@ -1,16 +1,15 @@
 const { Client, Collection } = require("discord.js");
 const fs = require("fs");
 if (!fs.existsSync('./config.json')) {
-  fs.appendFileSync('./config.json', {
+  console.log("config.json doesn't exists. Attemping to create a new one...")
+  fs.writeFileSync('./config.json', `{
     "token": "",
-    "activity": "hellsnakebot|$help",
+    "activity": "hellsnakebot|!help",
     "prefix": "!",
     "Admin": ""
-  })
-  const config = require("./config.json");
-} else {
-  const config = require("./config.json");
+  }`)
 }
+const config = require("./config.json");
 const moment = require('moment');
 
 const client = new Client({
