@@ -1,17 +1,17 @@
 module.exports = {
-    name: "restart",
+    name: "shutdown",
     category: "Owner",
-    description: "Restart the Bot",
+    description: "Shutdown the Bot",
     usage: "[command]",
     run: async (client, message, args) => {
         try {
             if (message.author.id !== require('../../config.json').Admin) {
                 return message.channel.send('Insufficient permission!!')
             } else {
-                await message.channel.send('Restarting...')
+                await message.channel.send('Shutting down...')
                 console.log()
-                console.log('Restarting...')
-                process.exit(2)
+                console.log('Shutting down...')
+                process.exit(0)
             }
         } catch (e) {
             console.error('An unexpected error expected:', e)
