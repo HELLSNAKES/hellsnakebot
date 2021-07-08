@@ -54,7 +54,7 @@ module.exports = {
                         if (config.osuAPI.client_id == '' || config.osuAPI.client_secret == '') {
                             message.channel.send('Missing `client_id` or `client_secret` in config.json.')
                         } else {
-                            if (typeof config.osuAPI.client_id != 'number') {
+                            if (isNaN(config.osuAPI.client_id) == true) {
                                 message.channel.send('typeof `client_id` is not number.')
                             } else {
                                 if (typeof config.osuAPI.client_secret != 'string') {
@@ -70,7 +70,7 @@ module.exports = {
                                     },
                                     body: JSON.stringify({
                                         "grant_type": "client_credentials",
-                                        "client_id": config.osuAPI.client_id,
+                                        "client_id": parseInt(config.osuAPI.client_id),
                                         "client_secret": config.osuAPI.client_secret,
                                         "scope": "public"
                                     })
