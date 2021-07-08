@@ -6,7 +6,13 @@ if (!fs.existsSync('./config.json')) {
     "token": "",
     "activity": "",
     "prefix": "",
-    "Admin": ""
+    "Admin": "",
+    "osuAPI": {
+      "client_id": "",
+      "client_secret": "",
+      "typeof client_id": "number",
+      "typeof client_secret": "string"
+    }
   }`)
 }
 const config = require("./config.json");
@@ -27,8 +33,12 @@ client.on('ready', () => {
   client.user.setActivity(config.activity);
 });
 client.on("message", async message => {
-  console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
   const prefix = (config.prefix);
+  if (message.content.startsWith(prefix)) {
+    console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
+  } else {
+    console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
+  }
   if (message.author.bot) return;
   if (!message.guild) return;
   if (!message.content.startsWith(prefix)) return;
