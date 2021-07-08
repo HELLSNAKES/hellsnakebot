@@ -4,7 +4,7 @@ const client = new Discord.Client()
 
 module.exports = {
     name: "setavatarbot",
-    category: "Owner",
+    category: "System",
     description: "Set avatar bot",
     usage: "[command +url]",
     run: async (client, message, args) => {

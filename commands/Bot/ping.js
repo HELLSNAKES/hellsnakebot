@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: 'ping',
-    category: "System",
+    category: "Bot",
     description: "Returns latency and API ping",
     usage: "[command]",
      run: async (client, message, args) => {

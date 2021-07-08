@@ -3,7 +3,7 @@ const disbut = require('discord-buttons');
 
 module.exports = {
     name: 'support',
-    category: "System",
+    category: "Bot",
     description: "support for bot",
     usage: "[command]",
     run: async (client, message, args) => {

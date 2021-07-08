@@ -1,6 +1,6 @@
 module.exports = {
     name: "restart",
-    category: "Owner",
+    category: "System",
     description: "Restart the Bot",
     usage: "[command]",
     run: async (client, message, args) => {

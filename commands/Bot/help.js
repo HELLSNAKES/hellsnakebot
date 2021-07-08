@@ -4,7 +4,7 @@ const ms = require('ms')
 module.exports = {
     name: "help",
     aliases: ["h"],
-    category: "System",
+    category: "Bot",
     description: "Returns all commands, or one specific command info",
     usage: "[command | alias]",
     run: async (client, message, args) => {

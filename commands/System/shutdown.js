@@ -1,6 +1,6 @@
 module.exports = {
     name: "shutdown",
-    category: "Owner",
+    category: "System",
     description: "Shutdown the Bot",
     usage: "[command]",
     run: async (client, message, args) => {

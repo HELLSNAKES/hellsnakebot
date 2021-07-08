@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports ={
     name: 'uptime',
     description: "Uptime the bot",
-    category: "System",
+    category: "Bot",
     usage: "[command]",
      run: async (client, message, args) => {     
      let days = Math.floor(client.uptime / 86400000);
