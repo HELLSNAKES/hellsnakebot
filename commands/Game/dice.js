@@ -8,12 +8,12 @@ module.exports = {
     run: async (client, message, args) => {
         const rolls = ["1", "2", "3", "4", "5", "6"];
         const roll = rolls[Math.floor(Math.random() * rolls.length)];
-        let newEmbed = new MessageEmbed()
+        let Embed = new MessageEmbed()
         .setTitle("🎲 Dice Roll!")
         .setThumbnail(message.author.displayAvatarURL())
         .setColor("RANDOM")
         .setDescription(`You rolled a **${roll}**!`)
         .setTimestamp()
-        message.channel.send(newEmbed)
+        message.channel.send(Embed)
     }   
 }
