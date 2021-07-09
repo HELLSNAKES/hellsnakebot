@@ -21,3 +21,6 @@ Released under the [MIT License](https://github.com/HELLSNAKES/hellsnakebot/blob
 4. Commit your changes: `git commit -m <commit message>`
 5. Push to the branch: `git push -u origin <branch-name>`
 6. Submit a pull request
+## Contact
+* Email: hellsnakess@hotmail.com
+* Facebook: https://www.facebook.com/hellsnake98
