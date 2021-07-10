@@ -4,7 +4,6 @@ if (!fs.existsSync('./config.json')) {
   console.log("config.json doesn't exists. Attemping to create a new one...")
   fs.writeFileSync('./config.json', `{
     "token": "",
-    "activity": "",
     "prefix": "",
     "Admin": "",
     "osuAPI": {
@@ -30,7 +29,7 @@ client.categories = fs.readdirSync("./commands/");
 });
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setActivity(config.activity);
+  client.user.setActivity(`HELLSNAKEBOT | Prefix ${config.prefix} `, { type: 'PLAYING' });
 });
 client.on("message", async message => {
   const prefix = (config.prefix);
