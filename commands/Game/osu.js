@@ -36,20 +36,8 @@ module.exports = {
         const { Image, createCanvas, registerFont, loadImage } = require('canvas')
         const rootpath = path.resolve(__dirname, '..', '..', "assets");
         registerFont(path.join(rootpath, "font.ttf"), { family: 'Varela' })
-        if (args == []) {
-            var username = ''
-        } else {
-            var username = encodeURIComponent(args.join(' ').trim());
-        }
-        var reply
-        try {
-            switch (username) {
-                case "":
-                    reply = `Please specify a username!`
-                    message.channel.send(reply)
-                    break;
-                default:
-                    if (config.osuAPI == undefined) {
+        if(args.length == 0){return message.channel.send(`Please specify a username!`)}            
+        if (config.osuAPI == undefined) {
                         message.channel.send('Missing `osu!API` in config.json.')
                     } else {
                         if (config.osuAPI.client_id == '' || config.osuAPI.client_secret == '') {
@@ -61,8 +49,37 @@ module.exports = {
                                 if (typeof config.osuAPI.client_secret != 'string') {
                                     message.channel.send('typeof `client_secret` is not string.')
                                 }
-                                var api = `https://osu.ppy.sh/api/v2/users/${encodeURIComponent(username)}/osu`
-
+                                switch(args[0]){
+                                    case "standard":
+                                        var playmode = "osu"
+                                        if(args[1]== undefined){return message.channel.send(`Please specify a username!`)}
+                                        var username = args.splice(1, args.length).join(" ")
+                                        var l = "osu.png"
+                                        break
+                                    case "taiko":
+                                        var playmode = "taiko"
+                                        if(args[1]== undefined){return message.channel.send(`Please specify a username!`)}
+                                        var username = args.splice(1, args.length).join(" ")
+                                        var l = "taiko.png"
+                                        break
+                                    case "catch":
+                                        var playmode = "fruits"
+                                        if(args[1]== undefined){return message.channel.send(`Please specify a username!`)}
+                                        var username = args.splice(1, args.length).join(" ")
+                                        var l = "catch.png"
+                                        break
+                                    case "mania":
+                                        var playmode = "mania"
+                                        if(args[1]== undefined){return message.channel.send(`Please specify a username!`)}
+                                        var username = args.splice(1, args.length).join(" ")
+                                        var l = "mania.png"
+                                        break
+                                    default:
+                                        var playmode = ""
+                                        var username = args.join(" ")
+                                        break
+                                }
+                                var api = `https://osu.ppy.sh/api/v2/users/${encodeURIComponent(username)}/${playmode}`
                                 var clientgrant = await fetch("https://osu.ppy.sh/oauth/token", {
                                     method: 'post',
                                     headers: {
@@ -188,8 +205,23 @@ module.exports = {
                                         ctx.fillText(accuracy + '%', 324 + 75, 537 + 40)
                                         ctx.fillText(playtime, 651 + 50, 536 + 40)
                                         ctx.fillText(score, 930 + 100, 536 + 40)
+                                        if(l == undefined){
+                                        switch(js.playmode){
+                                            case "osu":
+                                                var l = "osu.png"
+                                                break
+                                            case "taiko":
+                                                var l = "taiko.png"
+                                                break
+                                            case "fruits":
+                                                var l = "fruits.png"
+                                                break
+                                            case "mania":
+                                                var l = "mania.png"
+                                                break
+                                        }}
                                         img.onload = function () { ctx.drawImage(img, 252, 261) }
-                                        img.src = path.join(rootpath, "osu.png")
+                                        img.src = path.join(rootpath, l)
                                         //stream
                                         const attachment = new MessageAttachment(canvas.toBuffer())
                                         message.channel.send(attachment)
@@ -198,13 +230,5 @@ module.exports = {
                             }
                         }
                     }
-                break;
-            }
-        } catch (e) {
-            if (e) {
-                console.error('An unexpected error occured:', e)
-                message.channel.send('An unexpected error occured: ' + e)
-            }
-        }
     }
 }
