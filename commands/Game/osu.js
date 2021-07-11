@@ -26,6 +26,7 @@ module.exports = {
     name: 'osu',
     category: "Game",
     description: "Informations about the osu!player",
+    timeout: 5000,
     usage: '[command + username]',
     run: async function (client, message, args) {
         var config = require('../../config.json')
