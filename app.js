@@ -18,7 +18,6 @@ if (!fs.existsSync('./config.json')) {
 }
 const config = require("./config.json");
 const moment = require('moment');
-const xpfile = require('./database/xp.json')
 const ms = require('ms');
 const Timeout = new Collection();
 
@@ -68,6 +67,7 @@ if(!fs.existsSync('./database/xp.json')) {
   })
   fs.appendFileSync('./database/xp.json', {})
 }
+const xpfile = require('./database/xp.json')
 client.on("message", function(message){
   if (message.author.bot) return;
   var addXP = Math.floor(Math.random() * 8) + 3
