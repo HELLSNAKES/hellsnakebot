@@ -62,6 +62,10 @@ client.on("message", async message => {
     }, command.timeout)
 });
 if(!fs.existsSync('./database/xp.json')) {
+  fs.mkdirSync('./database', {
+    mode: 0o777,
+    recursive: true
+  })
   fs.appendFileSync('./database/xp.json', {})
 }
 client.on("message", function(message){
