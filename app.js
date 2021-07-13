@@ -65,7 +65,7 @@ if(!fs.existsSync('./database/xp.json')) {
     mode: 0o777,
     recursive: true
   })
-  fs.appendFileSync('./database/xp.json', {})
+  fs.appendFileSync('./database/xp.json', '{}')
 }
 const xpfile = require('./database/xp.json')
 client.on("message", function(message){
