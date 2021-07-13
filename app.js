@@ -61,6 +61,9 @@ client.on("message", async message => {
       Timeout.delete(`${command.name}${message.author.id}`)
     }, command.timeout)
 });
+if(!fs.existsSync('./database/xp.json')) {
+  fs.appendFileSync('./database/xp.json', {})
+}
 client.on("message", function(message){
   if (message.author.bot) return;
   var addXP = Math.floor(Math.random() * 8) + 3

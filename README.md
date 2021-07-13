@@ -4,6 +4,7 @@
 2. Git: **[Link](https://git-scm.com)**
 3. Discord Bot Token: **[Link](https://discord.com/developers/applications)**
 4. OsuClientApi: **[Link](https://osu.ppy.sh/home/account/edit#new-oauth-application)**
+5. YouTube API v3: **[Link](https://console.cloud.google.com/apis/library/youtube.googleapis.com)**
 ## ⚙️ Setting
 ```
 git clone https://github.com/HELLSNAKES/hellsnakebot.git
