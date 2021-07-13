@@ -11,6 +11,7 @@
     "rules": {
         "no-redeclare": 0,
         "no-useless-escape": 1,
-        "no-empty": 1
+        "no-empty": 1,
+        "no-unused-vars": 1
     }
 }

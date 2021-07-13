@@ -1,3 +1,6 @@
 node_modules
 config.json
 *.json
+.eslintrc.json 
+temp
+./database/xp.json

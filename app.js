@@ -12,7 +12,8 @@ if (!fs.existsSync('./config.json')) {
       "client_secret": "",
       "typeof client_id": "number",
       "typeof client_secret": "string"
-    }
+    },
+    "youtubeAPI": ""
   }`)
 }
 const config = require("./config.json");
