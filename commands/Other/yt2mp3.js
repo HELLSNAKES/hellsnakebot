@@ -63,7 +63,7 @@ module.exports = {
                         }
                     }
                 } else {
-                    message.reply('This video is longer than 10min.')
+                    message.reply('This video is longer than 8m30s.')
                 }
             } else {
                 message.reply('This video does not exists, or unaccessable.')
