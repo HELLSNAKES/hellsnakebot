@@ -25,3 +25,8 @@ Released under the [MIT License](https://github.com/HELLSNAKES/hellsnakebot/blob
 ## Contact
 * Email: hellsnakess@hotmail.com
 * Facebook: https://www.facebook.com/hellsnake98
+## Contributors
+<a href="https://github.com/HELLSNAKES/hellsnakebot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=HELLSNAKES/hellsnakebot" />
+</a>
+
