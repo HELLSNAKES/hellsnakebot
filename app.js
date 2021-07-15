@@ -4,6 +4,7 @@ const fs = require("fs");
 if (!fs.existsSync('./config.json')) {
   console.log("config.json doesn't exists. Attemping to create a new one...")
   fs.writeFileSync('./config.json', `{
+    "autoUpdate": true,
     "token": "",
     "prefix": "",
     "Admin": "",
@@ -16,12 +17,30 @@ if (!fs.existsSync('./config.json')) {
     "youtubeAPI": ""
   }`)
 }
-const config = require("./config.json");
+var config = require("./config.json");
+const fetch = require('node-fetch');
 const moment = require('moment');
 const ms = require('ms');
 const Timeout = new Collection();
-
-
+let skip = false
+const childProcess = require('child_process')
+async function update() {
+  if (require('./config.json').autoUpdate == true) {
+    var package = await fetch('https://raw.githubusercontent.com/HELLSNAKES/hellsnakebot/main/package.json')
+    package = await package.json()
+    if (require('./package.json').version.toString() != package.version.toString()) {
+      console.log('New update avaliable. Updating via git...')
+      const child = childProcess.spawn('git', ['pull'], {
+        stdio: 'inherit'
+      })
+      child.on('close', () => {
+        client.login(config.token);
+        skip = true
+      })
+    }
+  }
+}
+update()
 const client = new Client({
   disableEveryone: true
 });
@@ -53,14 +72,14 @@ client.on("message", async message => {
   let command = client.commands.get(cmd);
   if (!command) command = client.commands.get(client.aliases.get(cmd));
   if (command)
-  if(Timeout.has(`${command.name}${message.author.id}`)) return message.channel.send(`You are on a \`${ms(Timeout.get(`${command.name}${message.author.id}`) - Date.now(), {long : true})}\` cooldown.`)
-    command.run(client, message, args);
-    Timeout.set(`${command.name}${message.author.id}`, Date.now() + command.timeout)
-    setTimeout(() => {
-      Timeout.delete(`${command.name}${message.author.id}`)
-    }, command.timeout)
+    if (Timeout.has(`${command.name}${message.author.id}`)) return message.channel.send(`You are on a \`${ms(Timeout.get(`${command.name}${message.author.id}`) - Date.now(), { long: true })}\` cooldown.`)
+  command.run(client, message, args);
+  Timeout.set(`${command.name}${message.author.id}`, Date.now() + command.timeout)
+  setTimeout(() => {
+    Timeout.delete(`${command.name}${message.author.id}`)
+  }, command.timeout)
 });
-if(!fs.existsSync('./database/xp.json')) {
+if (!fs.existsSync('./database/xp.json')) {
   fs.mkdirSync('./database', {
     mode: 0o777,
     recursive: true
@@ -68,42 +87,44 @@ if(!fs.existsSync('./database/xp.json')) {
   fs.appendFileSync('./database/xp.json', '{}')
 }
 const xpfile = require('./database/xp.json')
-client.on("message", function(message){
+client.on("message", function (message) {
   if (message.author.bot) return;
   var addXP = Math.floor(Math.random() * 8) + 3
 
   if (!xpfile[message.author.id]) {
-      xpfile[message.author.id] = {
-          xp: 0,
-          level: 1,
-          reqxp: 100
-      }
+    xpfile[message.author.id] = {
+      xp: 0,
+      level: 1,
+      reqxp: 100
+    }
 
-      fs.writeFile("./database/xp.json", JSON.stringify(xpfile), function(err){
-          if (err) console.log(err)
-      })
+    fs.writeFile("./database/xp.json", JSON.stringify(xpfile), function (err) {
+      if (err) console.log(err)
+    })
   }
 
   xpfile[message.author.id].xp += addXP
 
-  if (xpfile[message.author.id].xp > xpfile[message.author.id].reqxp){
-      xpfile[message.author.id].xp -= xpfile[message.author.id].reqxp
-      xpfile[message.author.id].reqxp *= 1.25 
-      xpfile[message.author.id].reqxp = Math.floor(xpfile[message.author.id].reqxp) 
-      xpfile[message.author.id].level += 1 
+  if (xpfile[message.author.id].xp > xpfile[message.author.id].reqxp) {
+    xpfile[message.author.id].xp -= xpfile[message.author.id].reqxp
+    xpfile[message.author.id].reqxp *= 1.25
+    xpfile[message.author.id].reqxp = Math.floor(xpfile[message.author.id].reqxp)
+    xpfile[message.author.id].level += 1
 
-      let member = message.mentions.users.first() || message.author
-      
-      const embed = new MessageEmbed()
+    let member = message.mentions.users.first() || message.author
+
+    const embed = new MessageEmbed()
       .setColor('RANDOM')
       .setTitle(`${member.tag}`)
-      .setDescription("You Are Now Level **"+xpfile[message.author.id].level+"**!")
+      .setDescription("You Are Now Level **" + xpfile[message.author.id].level + "**!")
       .setImage('https://emoji.gg/assets/emoji/9104-nekodance.gif')
-      message.channel.send(embed).then(embed => {embed.delete({ timeout: 10000 })})
-   
+    message.channel.send(embed).then(embed => { embed.delete({ timeout: 10000 }) })
+
   }
-  fs.writeFile("./database/xp.json", JSON.stringify(xpfile), function(err){
-      if (err) console.log(err)
+  fs.writeFile("./database/xp.json", JSON.stringify(xpfile), function (err) {
+    if (err) console.log(err)
   })
 });
-client.login(config.token);
+if (!skip) {
+  client.login(config.token);
+}
