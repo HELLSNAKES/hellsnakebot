@@ -6,6 +6,7 @@ const os = require('os');
         name:"botinfo",
         category: "Bot",
         description: "Send detailed info about the client",
+        timeout: 10000,
         usage: "[command]",
         run: async (client, message, args) => {
             const embed = new MessageEmbed()

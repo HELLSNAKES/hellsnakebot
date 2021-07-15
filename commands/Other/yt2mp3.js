@@ -36,7 +36,8 @@ module.exports = {
     name: "yt2mp3",
     category: "Other",
     description: "Get audio file from a video in https://youtube.com",
-    usage: "[command + youtunbe link/search term]",
+    timeout: 10000,
+    usage: "[command + youtube link/search term]",
     run: async function yt2mp3Func(client, message, args, retry) {
         if (args.length > 0) {
             var url = args[0];

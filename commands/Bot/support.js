@@ -5,6 +5,7 @@ module.exports = {
     name: 'support',
     category: "Bot",
     description: "support for bot",
+    timeout: 5000,
     usage: "[command]",
     run: async (client, message, args) => {
        const embed = new Discord.MessageEmbed()

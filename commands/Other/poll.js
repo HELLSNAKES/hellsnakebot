@@ -4,6 +4,7 @@ module.exports = {
   name: "poll",
   category: "Other",
   description: "starts a poll",
+  timeout: 5000,
   usage: "[command] + [channel] + [question]",
     run: async (client, message, args) => {
         let channelID = message.mentions.channels.first()

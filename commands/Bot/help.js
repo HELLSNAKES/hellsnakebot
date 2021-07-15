@@ -6,6 +6,7 @@ module.exports = {
     aliases: ["h"],
     category: "Bot",
     description: "Returns all commands, or one specific command info",
+    timeout: 5000,
     usage: "[command | alias]",
     run: async (client, message, args) => {
         if (args[0]) {

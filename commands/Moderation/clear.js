@@ -3,6 +3,7 @@ module.exports = {
     name: "clear",
     category: "Moderation",
     description: "delete message",
+    timeout: 5000,
     usage: "[COMMAND] + [amount]",
     run: async (client, message, args) => {
         if (!message.member.permissions.has("MANAGE_MESSAGES"))

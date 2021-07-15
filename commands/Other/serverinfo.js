@@ -4,6 +4,7 @@ module.exports = {
     name: "serverinfo",
     category: "Other",
     description: "Shows info about a server",
+    timeout: 10000,
     usage: "[command]",
     run: async (client, message, args) => {
         const embed = new MessageEmbed()

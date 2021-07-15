@@ -4,6 +4,7 @@ module.exports ={
     name: 'uptime',
     description: "Uptime the bot",
     category: "Bot",
+    timeout: 5000,
     usage: "[command]",
      run: async (client, message, args) => {     
      let days = Math.floor(client.uptime / 86400000);
