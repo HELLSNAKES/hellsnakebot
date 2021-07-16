@@ -22,6 +22,7 @@
   "homepage": "https://github.com/HELLSNAKES/hellsnake-bot#readme",
   "dependencies": {
     "ascii-table": "0.0.9",
+    "axios": "^0.21.1",
     "canvas": "^2.8.0",
     "common-tags": "^1.8.0",
     "concat-stream": "^2.0.0",
