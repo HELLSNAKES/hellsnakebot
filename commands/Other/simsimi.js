@@ -1,17 +1,21 @@
-const axios = require('axios');
+const fetch = require('node-fetch')
 module.exports = {
     name: "simsimi",
     category: "Other",
     description: "Talk with SimSimi",
     usage: "[command] + [text]",
     run: async(client, message, args) => {
-        try {
-            const url = await axios.get(`https://api.simsimi.net/v1/?text=${encodeURIComponent(args.join(''))}&lang=vi_VN`)
-            message.channel.send(url.data.success)
-        }
-        catch(e) {
-            message.channel.send('An Error Occured, Try Again Later.')
-        }
+            const text = args.join(' ')
+            if(!text) return message.channel.send('Usage [command] + [text]')
+            const url = `https://api.simsimi.net/v1/?text=${encodeURIComponent(text)}&lang=vi_VN`
+            let response
+            try{
+                response = await fetch(url).then(res => res.json())
+            }
+            catch(e) {
+                return message.reply('An Error Occured, Try Again Later.')
+            }
+            message.channel.send(response.success)
     }
 }
    
