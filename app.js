@@ -6,7 +6,7 @@ if (!fs.existsSync('./config.json')) {
   fs.writeFileSync('./config.json', `{
     "autoUpdate": true,
     "token": "",
-    "prefix": "",
+    "prefix": "!",
     "Admin": "",
     "osuAPI": {
       "client_id": "",
@@ -18,6 +18,39 @@ if (!fs.existsSync('./config.json')) {
   }`)
 }
 var config = require("./config.json");
+/*
+const configvalue = ['autoUpdate', 'token', 'prefix', 'Admin', 'osuAPI', 'youtubeAPI']
+configvalue.forEach((a) => {
+  if(config.a == undefined) {
+    console.log(a, 'was not found in config.json. Adding with default value...')
+    if(a == 'autoUpdate') {
+      config.autoUpdate == true
+    }
+    if(a == 'token' ) {
+      config.token = ''
+    }
+    if(a == 'youtubeAPI') {
+      config.youtubeAPI = ''
+    }
+    if( a == 'Admin' ) {
+      config.Admin = ''
+    }
+    if(a == 'prefix') {
+      config.prefix = '!'
+    }
+    if(a == 'osuAPI') {
+      config.osuAPI = {
+        "client_id": "",
+        "client_secret": "",
+        "typeof client_id": "number",
+        "typeof client_secret": "string"
+      }
+      console.log(JSON.stringify(config, null, 4))
+      fs.writeFileSync('./config.json', JSON.stringify(config, null, 4))
+    }
+  }
+})
+*/
 const fetch = require('node-fetch');
 const moment = require('moment');
 const ms = require('ms');
@@ -30,12 +63,8 @@ async function update() {
     package = await package.json()
     if (require('./package.json').version.toString() != package.version.toString()) {
       console.log('New update avaliable. Updating via git...')
-      const child = childProcess.spawn('git', ['pull'], {
+      childProcess.spawn('git', ['pull'], {
         stdio: 'inherit'
-      })
-      child.on('close', () => {
-        client.login(config.token);
-        skip = true
       })
     }
   }
