@@ -53,22 +53,17 @@ configvalue.forEach(async (a) => {
   }
 })
 
-const fetch = require('node-fetch');
 const moment = require('moment');
 const ms = require('ms');
 const Timeout = new Collection();
 let skip = false
 const childProcess = require('child_process')
 async function update() {
-  if (require('./config.json').autoUpdate == true) {
-    var package = await fetch('https://raw.githubusercontent.com/HELLSNAKES/hellsnakebot/main/package.json')
-    package = await package.json()
-    if (require('./package.json').version.toString() != package.version.toString()) {
-      console.log('New update avaliable. Updating via git...')
+  if (config.autoUpdate == true) {
+      console.log('[Git]', 'Updating...')
       childProcess.spawn('git', ['pull'], {
         stdio: 'inherit'
-      })
-    }
+    })
   }
 }
 update()
