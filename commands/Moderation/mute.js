@@ -8,6 +8,8 @@ module.exports = {
     run : async(client, message, args) => {
         if (!message.member.permissions.has("MANAGE_MESSAGES"))
             return message.channel.send(`Insufficient permission!!`);
+        if(!message.guild.me.hasPermission("MANAGE_MESSAGES"))
+            return message.channel.send(`I dont have permissions to mute`);
         const Member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         if(!Member) return message.channel.send('Please mention a user!')
         const role = message.guild.roles.cache.find(role => role.name.toLowerCase() === 'muted')
