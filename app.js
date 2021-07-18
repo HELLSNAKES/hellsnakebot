@@ -18,7 +18,6 @@ if (!fs.existsSync('./config.json')) {
   }`)
 }
 var config = JSON.parse(fs.readFileSync('./config.json').toString());
-console.log(config)
 
 const configvalue = ['autoUpdate', 'token', 'prefix', 'Admin', 'osuAPI', 'youtubeAPI']
 configvalue.forEach(async (a) => {
@@ -46,13 +45,11 @@ configvalue.forEach(async (a) => {
         "typeof client_id": "number",
         "typeof client_secret": "string"
       }
-      console.log(JSON.stringify(config, null, 4))
-      await fs.unlinkSync('./config.json')
-      await fs.writeFileSync('./config.json', JSON.stringify(config, null, 4),{
-        mode: 0o777,
-        recursive: true
-      })
     }
+    await fs.writeFileSync('./config.json', JSON.stringify(config, null, 4),{
+      mode: 0o666,
+      recursive: true
+    })
   }
 })
 
