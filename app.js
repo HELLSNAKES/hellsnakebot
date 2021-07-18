@@ -17,28 +17,33 @@ if (!fs.existsSync('./config.json')) {
     "youtubeAPI": ""
   }`)
 }
+if (!fs.existsSync('./database/data.json')) {
+  console.log('owo, data file not found.')
+  fs.writeFileSync('./database/data.json', '{}')
+}
+
 var config = JSON.parse(fs.readFileSync('./config.json').toString());
 
 const configvalue = ['autoUpdate', 'token', 'prefix', 'Admin', 'osuAPI', 'youtubeAPI']
 configvalue.forEach(async (a) => {
-  if(config[a] == undefined) {
+  if (config[a] == undefined) {
     console.log(a, 'was not found in config.json. Adding with default value...')
-    if(a == 'autoUpdate') {
+    if (a == 'autoUpdate') {
       config.autoUpdate = true
     }
-    if(a == 'token' ) {
+    if (a == 'token') {
       config.token = ''
     }
-    if(a == 'youtubeAPI') {
+    if (a == 'youtubeAPI') {
       config.youtubeAPI = ''
     }
-    if( a == 'Admin' ) {
+    if (a == 'Admin') {
       config.Admin = ''
     }
-    if(a == 'prefix') {
+    if (a == 'prefix') {
       config.prefix = '!'
     }
-    if(a == 'osuAPI') {
+    if (a == 'osuAPI') {
       config.osuAPI = {
         "client_id": "",
         "client_secret": "",
@@ -46,7 +51,7 @@ configvalue.forEach(async (a) => {
         "typeof client_secret": "string"
       }
     }
-    await fs.writeFileSync('./config.json', JSON.stringify(config, null, 4),{
+    await fs.writeFileSync('./config.json', JSON.stringify(config, null, 4), {
       mode: 0o666,
       recursive: true
     })
@@ -60,9 +65,9 @@ let skip = false
 const childProcess = require('child_process')
 async function update() {
   if (config.autoUpdate == true) {
-      console.log('[Git]', 'Updating...')
-      childProcess.spawn('git', ['pull'], {
-        stdio: 'inherit'
+    console.log('[Git]', 'Updating...')
+    childProcess.spawn('git', ['pull'], {
+      stdio: 'inherit'
     })
   }
 }
@@ -74,7 +79,7 @@ require('discord-buttons')(client);
 client.commands = new Collection();
 client.aliases = new Collection();
 client.categories = fs.readdirSync("./commands/");
-["command"].forEach(handler => {
+["command", 'data'].forEach(handler => {
   require(`./handlers/${handler}`)(client);
 });
 client.on('ready', () => {
@@ -86,7 +91,14 @@ client.on("message", async message => {
   if (message.content.startsWith(prefix)) {
     console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
   } else {
-    console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
+    if (message.attachments.first() != undefined && message.content != '') {
+      console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
+      console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an attachment in ${message.channel.id}: ${message.attachments.first().url}`)
+    } else if(message.attachments.first() != undefined && message.content == '') {
+      console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an attachment in ${message.channel.id}: ${message.attachments.first().url}`)
+    } else if(message.attachments.first() == undefined && message.content != '') {
+      console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
+    } else ;
   }
   if (message.author.bot) return;
   if (!message.guild) return;
