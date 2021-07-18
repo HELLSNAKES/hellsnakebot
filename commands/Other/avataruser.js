@@ -1,9 +1,9 @@
 const Discord = require("discord.js")
 
 module.exports = {
-    name: "avatar",
+    name: "avataruser",
     category: "Other",
-    description: "Get user avatar",
+    description: "Get avatar user",
     usage: "[command | user] or [command]",
     run: async(client, message, args) => {
 
