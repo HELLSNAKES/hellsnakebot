@@ -17,14 +17,15 @@ if (!fs.existsSync('./config.json')) {
     "youtubeAPI": ""
   }`)
 }
-var config = require("./config.json");
-/*
+var config = JSON.parse(fs.readFileSync('./config.json').toString());
+console.log(config)
+
 const configvalue = ['autoUpdate', 'token', 'prefix', 'Admin', 'osuAPI', 'youtubeAPI']
-configvalue.forEach((a) => {
-  if(config.a == undefined) {
+configvalue.forEach(async (a) => {
+  if(config[a] == undefined) {
     console.log(a, 'was not found in config.json. Adding with default value...')
     if(a == 'autoUpdate') {
-      config.autoUpdate == true
+      config.autoUpdate = true
     }
     if(a == 'token' ) {
       config.token = ''
@@ -46,11 +47,15 @@ configvalue.forEach((a) => {
         "typeof client_secret": "string"
       }
       console.log(JSON.stringify(config, null, 4))
-      fs.writeFileSync('./config.json', JSON.stringify(config, null, 4))
+      await fs.unlinkSync('./config.json')
+      await fs.writeFileSync('./config.json', JSON.stringify(config, null, 4),{
+        mode: 0o777,
+        recursive: true
+      })
     }
   }
 })
-*/
+
 const fetch = require('node-fetch');
 const moment = require('moment');
 const ms = require('ms');
@@ -115,7 +120,7 @@ if (!fs.existsSync('./database/xp.json')) {
   })
   fs.appendFileSync('./database/xp.json', '{}')
 }
-const xpfile = require('./database/xp.json')
+const xpfile = require('./database/xp.json');
 client.on("message", function (message) {
   if (message.author.bot) return;
   var addXP = Math.floor(Math.random() * 8) + 3
