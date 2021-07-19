@@ -2,16 +2,16 @@ const client = require('nekos.life');
 const neko = new client();
 const Discord = require("discord.js");
 module.exports = {
-  name: "poke",
+  name: "sfwneko",
   category: "SFW",
-  description: "random poke pic",
+  description: "random neko pic",
   usage: "[command]",
   timeout: 5000,
   run: async(client, message, args) => {
-    let url = await neko.sfw.poke()
+    let url = await neko.sfw.neko()
     const embed = new Discord.MessageEmbed()
     .setColor("RANDOM")
-    .setTitle("Poke")
+    .setTitle("SFW Neko")
     .setImage(url.url) 
     message.channel.send(embed)
   }
