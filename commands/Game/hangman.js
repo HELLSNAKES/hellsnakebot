@@ -7,7 +7,11 @@ module.exports = {
     usage: "[command+ [channel] + [word to guess]",
     run : async(client, message, args) => {
         if(!message.member.hasPermission("MANAGE_MESSAGES")) 
-         return message.channel.send('Insufficient permission!!')
+        return message.channel.send('Insufficient permission!!')
+        const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0])
+        if(!channel) return message.channel.send('Please specify a channel!!!')
+        const word = args.slice(1).join(" ")
+        if(!word) return  message.channel.send('Please specify a word to guess!!!')
         const hang = new hangman({
             message: message,
             word: word,
