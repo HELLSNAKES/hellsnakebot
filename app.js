@@ -18,6 +18,10 @@ if (!fs.existsSync('./config.json')) {
   }`)
 }
 if (!fs.existsSync('./database/data.json')) {
+  fs.mkdirSync('./database', {
+    mode: 0o777,
+    recursive: true
+  })
   console.log('owo, data file not found.')
   fs.writeFileSync('./database/data.json', '{}')
 }
