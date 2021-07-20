@@ -88,7 +88,15 @@ client.categories = fs.readdirSync("./commands/");
 });
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setActivity(`HELLSNAKEBOT | Prefix ${config.prefix} `, { type: 'PLAYING' });
+  setInterval(() => {
+    const statuses = [
+        `github.com/hellsnakes/hellsnakebot`,
+        `HELLSNAKEBOT| ${config.prefix}help`,
+        `osu!`,
+    ]
+
+    const status = statuses[Math.floor(Math.random() * statuses.length)]
+    client.user.setActivity(status, { type: "PLAYING"})}, 5000) 
 });
 client.on("message", async message => {
   const prefix = (config.prefix);
