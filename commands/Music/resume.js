@@ -11,6 +11,8 @@ module.exports = {
         if(!message.member.voice.channel) 
         return message.reply('Please join a voice channel!');
         await client.distube.resume(message)
+        await client.distube.pause(message)
+        await client.distube.resume(message)
         await message.react('▶');
     }
 }
