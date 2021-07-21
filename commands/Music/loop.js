@@ -1,16 +1,16 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    name: "stop",
-    aliases: ["st"],
+    name: "loop",
+    aliases: ["rp"],
     category: "Music",
-    description: "stops playing a song!",
+    description: "loops throught current song",
     timeout: 3000,
     usage: "[command]",
     run : async(client, message, args) => {
         if(!message.member.voice.channel) 
         return message.reply('Please join a voice channel!');
-        await client.distube.stop(message)
-        await message.react('⏹');
+        await client.distube.setRepeatMode(message, parseInt(args[0]));
+        await message.react('🔁');
     }
 }
