@@ -175,6 +175,18 @@ client.on("message", function (message) {
     if (err) console.log(err)
   })
 });
+const distube = require('distube');
+client.distube = new distube(client, { searchSongs: false, emitNewSongOnly: true })
+client.distube
+    .on('playSong', (message, queue, song) => message.channel.send(
+        `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`,
+    ))
+    .on('addSong', (message, queue, song) => message.channel.send(
+        `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`,
+    ))
+    .on('error', (message, e) => {
+		message.channel.send(`An error encountered: ${e}`)
+	});
 if (!skip) {
   client.login(config.token);
 }
