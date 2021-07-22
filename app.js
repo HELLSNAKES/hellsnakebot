@@ -74,7 +74,7 @@ const main = async () => {
 
       const status = statuses[Math.floor(Math.random() * statuses.length)]
       client.user.setActivity(status, { type: "PLAYING" })
-    }, 5000)
+    }, 600000)
   });
   client.on("message", async message => {
     const prefix = (config.prefix);
