@@ -46,17 +46,22 @@ module.exports = {
             if (ytdl.validateURL(url)) {
                 var url = url
             } else {
-                var q = args.join(' ')
-                var api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&key=${config.youtubeAPI}&q=${q}`
-                var res = await fetch(api, {
-                    method: 'GET',
-                    headers: {
-                        Accept: 'application/json'
-                    }
-                })
-                var res = await res.json()
-                var url = `https://www.youtube.com/watch?v=${res.items[0].id.videoId}`
+                if (config.youtubeAPI != '') {
+                    var q = args.join(' ')
+                    var api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&key=${config.youtubeAPI}&q=${q}`
+                    var res = await fetch(api, {
+                        method: 'GET',
+                        headers: {
+                            Accept: 'application/json'
+                        }
+                    })
+                    var res = await res.json()
+                    var url = `https://www.youtube.com/watch?v=${res.items[0].id.videoId}`
+                } else {
+                    var url = null
+                }
             }
+            if (url != null) {
                 try {
                     var info = await ytdl.getInfo(url);
                     console.log("Got video info from Youtube (for", message.author.id + ").");
@@ -109,56 +114,58 @@ module.exports = {
 
                             ps.collect(mp3file).then(async function (mp3content) {
                                 fs.writeFileSync(path.join(__root, i), mp3content);
-                                if(fs.existsSync(path.join(__root, i))) {
-                                message.channel.send('Converting: ' + info.videoDetails.title)
-                                var p = exec(ffmpeg, ["-i", path.join(__root, i), "-vn", "-ac", "2", "-ab", "128k", "-acodec", "libmp3lame", "-y", path.join(__root, o)]);
+                                if (fs.existsSync(path.join(__root, i))) {
+                                    message.channel.send('Converting: ' + info.videoDetails.title)
+                                    var p = exec(ffmpeg, ["-i", path.join(__root, i), "-vn", "-ac", "2", "-ab", "128k", "-acodec", "libmp3lame", "-y", path.join(__root, o)]);
 
-                                // eslint-disable-next-line no-inner-declarations
-                                function r(error, stdout, stderr) {
-                                    if (error) {
-                                        message.channel.send('An unexpected error occured: ' + error)
+                                    // eslint-disable-next-line no-inner-declarations
+                                    function r(error, stdout, stderr) {
+                                        if (error) {
+                                            message.channel.send('An unexpected error occured: ' + error)
+                                            fs.unlinkSync(path.join(__root, i))
+                                        }
+                                        const attachment = new MessageAttachment(fs.createReadStream(path.join(__root, o)))
+                                        message.channel.send('Converted: ' + info.videoDetails.title + ':', attachment)
                                         fs.unlinkSync(path.join(__root, i))
+                                        fs.unlinkSync(path.join(__root, o))
                                     }
-                                    const attachment = new MessageAttachment(fs.createReadStream(path.join(__root, o)))
-                                    message.channel.send('Converted: ' + info.videoDetails.title + ':', attachment)
-                                    fs.unlinkSync(path.join(__root, i))
-                                    fs.unlinkSync(path.join(__root, o))
+
+                                    let stdout = concatStream(p.stdout);
+                                    let stderr = concatStream(p.stderr);
+                                    p.on("close", async function (code, signal) {
+                                        if (code != 0) {
+                                            let pstdout = await stdout;
+                                            let pstderr = await stderr;
+                                            return r(pstderr, pstdout, pstderr);
+                                        }
+                                        r(null, "", "");
+                                    });
+
+                                    p.on("error", function (err) {
+                                        r(err, "", "");
+                                    });
                                 }
-
-                                let stdout = concatStream(p.stdout);
-                                let stderr = concatStream(p.stderr);
-                                p.on("close", async function (code, signal) {
-                                    if (code != 0) {
-                                        let pstdout = await stdout;
-                                        let pstderr = await stderr;
-                                        return r(pstderr, pstdout, pstderr);
-                                    }
-                                    r(null, "", "");
-                                });
-
-                                p.on("error", function (err) {
-                                    r(err, "", "");
-                                });
-                            }
                             }).catch(function (err) {
                                 message.channel.send("Errored while downloading \"" + info.videoDetails.title + "\": " + err)
                             });
-                                if (!retry) {
-                                    message.channel.send("Downloading \"" + info.videoDetails.title + "\"...")
-                                }
-                            
+                            if (!retry) {
+                                message.channel.send("Downloading \"" + info.videoDetails.title + "\"...")
+                            }
+
                         } else {
                             message.channel.send("Cannot process that video (Live Stream or length longer than 10 minutes?).")
                         }
-                    
+
                     } else {
                         message.channel.send("This video does not exist, or not accessible.")
                     }
-                
+
                 } catch (ex) {
                     message.channel.send("Error: " + ex.message)
                 }
-            
+            } else {
+                message.channel.send('Missing `youtubeAPI` in config.json.')
+            }
         } else {
             message.channel.send("Missing youtube link or search terms!")
         }
