@@ -167,8 +167,10 @@ const main = async () => {
     })
     .on('empty', (message, queue) => {
       message.channel.send(`***Channel is empty. Leaving the channel***`)
+    })
+    .on('initQueue', (queue) => {
+      queue.autoplay = false;
     });
-
     client.login(config.token);
   } else {
     console.error('[ERROR]','Please spectify a Discord bot token in config.json.')
