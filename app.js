@@ -154,7 +154,7 @@ const main = async () => {
     })
   });
   const distube = require('distube');
-  client.distube = new distube(client, { searchSongs: false, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: true })
+  client.distube = new distube(client, { searchSongs: false, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: false ,updateYouTubeDL: false })
   client.distube
     .on('playSong', (message, queue, song) => message.channel.send(
       `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`,
@@ -167,9 +167,6 @@ const main = async () => {
     })
     .on('empty', (message, queue) => {
       message.channel.send(`***Channel is empty. Leaving the channel***`)
-    })
-    .on('finish', (message, queue) => {
-      message.channel.send(`***Finish queue. Leaving the channel***`)
     });
 
     client.login(config.token);
