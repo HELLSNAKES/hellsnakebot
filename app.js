@@ -176,7 +176,7 @@ client.on("message", function (message) {
   })
 });
 const distube = require('distube');
-client.distube = new distube(client, { searchSongs: false, emitNewSongOnly: true })
+client.distube = new distube(client, { searchSongs: false, emitNewSongOnly: true , leaveOnEmpty: true , leaveOnFinish: true })
 client.distube
     .on('playSong', (message, queue, song) => message.channel.send(
         `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`,
@@ -186,7 +186,13 @@ client.distube
     ))
     .on('error', (message, e) => {
 		message.channel.send(`An error encountered: ${e}`)
-	});
+	})
+  .on('empty', (message, queue) => {
+		message.channel.send(`***Channel is empty. Leaving the channel***`)
+  })
+  .on('finish', (message, queue) => {
+		message.channel.send(`***Finish queue. Leaving the channel***`)
+  });
 if (!skip) {
   client.login(config.token);
 }
