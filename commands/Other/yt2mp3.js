@@ -7,6 +7,8 @@ const ps = require('promise-streams')
 const ffmpeg = require('ffmpeg-static')
 const fs = require('fs');
 const { MessageAttachment } = require('discord.js');
+const fetch = require('node-fetch')
+const config = require('../../config.json')
 /**
  * 
  * @param {stream.Readable} stream 
@@ -42,6 +44,19 @@ module.exports = {
         if (args.length > 0) {
             var url = args[0];
             if (ytdl.validateURL(url)) {
+                var url = url
+            } else {
+                var q = args.join(' ')
+                var api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&key=${config.youtubeAPI}&q=${q}`
+                var res = await fetch(api, {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                })
+                var res = await res.json()
+                var url = `https://www.youtube.com/watch?v=${res.items[0].id.videoId}`
+            }
                 try {
                     var info = await ytdl.getInfo(url);
                     console.log("Got video info from Youtube (for", message.author.id + ").");
@@ -144,11 +159,8 @@ module.exports = {
                     message.channel.send("Error: " + ex.message)
                 }
             
-            } else {
-                message.channel.send("The link provided is not a valid YouTube links.")
-            }
         } else {
-            message.channel.send("Missing youtube link!")
+            message.channel.send("Missing youtube link or search terms!")
         }
     }
 }
