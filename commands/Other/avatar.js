@@ -1,7 +1,8 @@
 const Discord = require("discord.js")
 
 module.exports = {
-    name: "avataruser",
+    name: "avatar",
+    aliases: ["avt"],
     category: "Other",
     description: "Get avatar user",
     usage: "[command | user] or [command]",
