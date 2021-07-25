@@ -4,7 +4,7 @@ const { DiscordTogether } = require("discord-together");
 module.exports = {
     name: "youtube",
     aliases: ["yt"],
-    category: "Togerther",
+    category: "Together",
     description: "Watch YouTube with your friends, on discord!",
     timeout: 5000,
     usage: "[command]",

@@ -4,7 +4,7 @@ const { DiscordTogether } = require("discord-together");
 module.exports = {
     name: "fishing",
     aliases: ["fs"],
-    category: "Togerther",
+    category: "Together",
     description: "Play discord fishing in vc!",
     timeout: 5000,
     usage: "[command]",

@@ -3,7 +3,7 @@ const { DiscordTogether } = require("discord-together");
 
 module.exports = {
     name: "chess",
-    category: "Togerther",
+    category: "Together",
     description: "Play discord chess in vc!",
     timeout: 5000,
     usage: "[command]",
