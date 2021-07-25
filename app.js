@@ -78,6 +78,9 @@ const main = async () => {
     });
     client.on("message", async message => {
       const prefix = (config.prefix);
+      if(message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`){
+        message.reply(`**Use ${config.prefix}help to display all commands available.**`);
+      }
       if (message.content.startsWith(prefix)) {
         console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
       } else {
