@@ -27,6 +27,7 @@
     "common-tags": "^1.8.0",
     "concat-stream": "^2.0.0",
     "discord-buttons": "^4.0.0",
+    "discord-minesweeper": "^1.1.0",
     "discord-together": "^1.1.22",
     "discord.js": "^12.5.3",
     "distube": "^2.8.15",
