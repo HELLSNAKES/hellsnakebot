@@ -12,7 +12,7 @@ module.exports ={
      let minutes = Math.floor(client.uptime / 60000) % 60;
      let seconds = Math.floor(client.uptime / 1000) % 60;
      const uptimeembed = new Discord.MessageEmbed()
-     .setTitle('HELLSNAKE-BOT')
+     .setTitle(`${client.user.username}`)
      .setColor('RED')
      .addField(':computer: UPTIME', ` ${days}days ${hours}hrs ${minutes}min ${seconds}sec`, true)	    
      .setTimestamp(Date())
