@@ -2,7 +2,7 @@ const { Client, Collection, MessageEmbed } = require("discord.js");
 const fs = require("fs");
 const childProcess = require('child_process')
 if (!fs.existsSync('./config.json')) {
-  console.log("config.json doesn't exists. Attemping to create a new one...")
+  console.log('[Config Handlers]',"config.json doesn't exists. Attemping to create a new one...")
   fs.writeFileSync('./config.json', `{
     "autoUpdate": true,
     "token": "",
@@ -14,7 +14,8 @@ if (!fs.existsSync('./config.json')) {
       "typeof client_id": "number",
       "typeof client_secret": "string"
     },
-    "youtubeAPI": ""
+    "youtubeAPI": "",
+    "oauthv2link": ""
   }`)
 }
 if (!fs.existsSync('./database/data.json')) {
@@ -22,7 +23,7 @@ if (!fs.existsSync('./database/data.json')) {
     mode: 0o777,
     recursive: true
   })
-  console.log('owo, data file not found.')
+  console.log('[Data Handlers]','owo, data file not found.')
   fs.writeFileSync('./database/data.json', '{}')
 }
 var config = JSON.parse(fs.readFileSync('./config.json').toString());
@@ -37,11 +38,12 @@ const defaultconfig = {
     "typeof client_id": "number",
     "typeof client_secret": "string"
   },
-  "youtubeAPI": ""
+  "youtubeAPI": "",
+  "oauthv2link": ""
 }
 for (let a in defaultconfig) {
   if (config[a] == undefined) {
-    console.log(a, 'was not found in config.json. Adding with defautl value' + defaultconfig[a] + '...')
+    console.log('[Config Handlers]',a, 'was not found in config.json. Adding with defautl value' + defaultconfig[a] + '...')
     config[a] = defaultconfig[a]
   }
   fs.writeFileSync('./config.json', JSON.stringify(config, null, 4))
