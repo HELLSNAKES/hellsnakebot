@@ -23,16 +23,6 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: "👥 Members Online: ",
-                    value: `There are ${message.guild.members.cache.filter(m => m.user.presence.status == "online").size} users online!`,
-                    inline: true
-                },
-                {
-                    name: "💻 Total Bots: ",
-                    value: `There are ${message.guild.members.cache.filter(m => m.user.bot).size} bots!`,
-                    inline: true
-                },
-                {
                     name: "🎈 Creation Date: ",
                     value: message.guild.createdAt.toLocaleDateString("en-us"),
                     inline: true

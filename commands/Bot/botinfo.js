@@ -25,22 +25,17 @@ const os = require('os');
                         inline: true
                     },
                     {
-                        name: '👥 Users',
-                        value:`Serving ${client.users.cache.size} users.`,
-                        inline: true
-                    },
-                    {
                         name: '🎈 Join Date',
                         value: client.user.createdAt.toLocaleDateString("en-us"),
                         inline: true
                     },
                     {
-                        name: '🛠 Discord Version',
+                        name: '🛠 Discord.js Version',
                         value: `${version}`,
                         inline: true
                     },
                     {
-                        name: '💎 Nodejs Version',
+                        name: '💎 Node.js Version',
                         value: `${process.version}`,
                         inline: true
                     },

@@ -15,7 +15,7 @@ module.exports = {
         }).join('\n')
         message.channel.send(
             new MessageEmbed()
-            .setTitle("HELLSNAKE top Guilds")
+            .setTitle(`${client.user.username}'s top Guild:`)
             .setThumbnail(client.user.displayAvatarURL())
             .setColor("RANDOM")
             .setDescription(description)

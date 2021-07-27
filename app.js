@@ -78,7 +78,7 @@ const main = async () => {
     });
     client.on("message", async message => {
       const prefix = (config.prefix);
-      if(message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`){
+      if (message.content == `<@!${client.user.id}>`) {
         message.reply(`**Use ${config.prefix}help to display all commands available.**`);
       }
       if (message.content.startsWith(prefix)) {
@@ -91,7 +91,18 @@ const main = async () => {
           console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an attachment in ${message.channel.id}: ${message.attachments.first().url}`)
         } else if (message.attachments.first() == undefined && message.content != '') {
           console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
-        } else;
+        } else {
+          if (message.embeds.length != 0) {
+            let a = message.embeds[0]
+            let embed = {}
+            for (let b in a) {
+              if (a[b] != null && (a[b] != [] && a[b].length != 0) && a[b] != {}) {
+                  embed[b] = a[b]
+              }
+            }
+            console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an embed in ${message.channel.id}: ${JSON.stringify(embed, null, 2)}`)
+          }
+        }
       }
       if (message.author.bot) return;
       if (!message.guild) return;
