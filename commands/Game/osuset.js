@@ -10,7 +10,11 @@ module.exports = {
         }
         const fetch = require('node-fetch')
         const config = require('../../config.json')
-        var username = args.join(' ')
+        if(args.length == 0) {
+            return message.channel.send(`Please specify a username!`)
+        } else {
+            var username = args.join(' ')
+        }
         if (config.osuAPI.client_id == '' || config.osuAPI.client_secret == '') {
             message.channel.send('Missing `client_id` or `client_secret` in config.json.')
         } else {
@@ -53,9 +57,9 @@ module.exports = {
                     message.channel.send('The `client_id` and/or the `client_secret` in config.json is incorrect. Unable to get user info.')
                 } else {
                     if (js.id == undefined) {
-                        message.channel.send(`"${decodeURIComponent(username)}" was not found on osu! Bancho server.`)
+                        message.channel.send(`:red_circle: \`${decodeURIComponent(username)}\` was not found on osu! Bancho server.`)
                     } else {
-                        client.data.osu[message.author.id] = username
+                        client.data.osu[message.author.id] = js.username
                         client.updateData()
                         message.channel.send(`:white_check_mark: \`${message.author.username}\`'s osu!username is now \`${js.username}\`.`)
                     }
