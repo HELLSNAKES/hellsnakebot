@@ -186,21 +186,12 @@ async function update() {
     if (fs.existsSync('./.git')) {
       //ensures that the bot was cloned by using git ./.git is in directory.
       console.log('[Updater]', 'Updating...')
-      var package = require('./package.json').dependencies
-      var devpackage = require('./package.json').devDependencies
       const child = childProcess.spawn('git', ['pull'])
       //ensure thats the bot run after update.
       child.on('close', async () => {
-        var packages = require('./package.json').dependencies
-        var devpackages = require('./package.json').devDependencies
-        if(package != packages || devpackage != devpackages) {
-          console.log('New dependencies found. Installing via npm...')
-          var childs = childProcess.spawn('npm',['i'])
-          childs.on('close', async () => {
-            console.log('[Updater]', 'Updated. Starting...')
-            await main()
-          })
-        }
+        //Ensuring thats new package are installed.
+        console.log('[Updater]', 'Installing new package...')
+        childProcess.execSync('npm i')
         console.log('[Updater]', 'Updated. Starting...')
         await main()
       })
