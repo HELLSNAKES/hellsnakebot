@@ -48,7 +48,7 @@ module.exports = {
             } else {
                 if (config.youtubeAPI != '') {
                     var q = args.join(' ')
-                    var api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&key=${config.youtubeAPI}&q=${q}`
+                    var api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&key=${config.youtubeAPI}&q=${encodeURIComponent(q)}`
                     var res = await fetch(api, {
                         method: 'GET',
                         headers: {
@@ -56,7 +56,12 @@ module.exports = {
                         }
                     })
                     var res = await res.json()
-                    var url = `https://www.youtube.com/watch?v=${res.items[0].id.videoId}`
+                    console.log(res)
+                    if (res.items.length == 0) {
+                        return message.channel.send(`:red_circle: \`${q}\` was not found.`)
+                    } else {
+                        var url = `https://www.youtube.com/watch?v=${res.items[0].id.videoId}`
+                    }
                 } else {
                     var url = null
                 }
