@@ -1,0 +1,14 @@
+{
+    "autoUpdate": true,
+    "token": "ODY2MTUxOTEzMTA3ODgyMDE0.YPOY1A.-U9PWQSbF7xMOlybJIBGGFJCf9Y",
+    "prefix": ".",
+    "Admin": "628633598001414165",
+    "osuAPI": {
+        "client_id": "8359",
+        "client_secret": "Fcnc5SfUt1SEuBEMCo2vcK4YFtKFWedGgCPn9Umn",
+        "typeof client_id": "number",
+        "typeof client_secret": "string"
+    },
+    "youtubeAPI": "AIzaSyAzTQ2f61V86I6ZTglQxCyagGW2Twj_PUA",
+    "oauthv2link": "https://discord.com/oauth2/authorize?client_id=866151913107882014&permissions=258033581910&scope=bot"
+}
