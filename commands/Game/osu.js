@@ -1,4 +1,5 @@
 
+
 const rect = function (ctx, x, y, width, height, radius = 5) { //source at https://github.com/Moorad/the-beautiful-bot/blob/master/handlers/format.ts
     if (typeof radius === 'number') {
         radius = {
@@ -21,7 +22,16 @@ const rect = function (ctx, x, y, width, height, radius = 5) { //source at https
     ctx.closePath();
     ctx.fill();
 }
+/*
+function flagurl(countryCode) {
+    var chars = countryCode.split('');
+    var hexEmojiChars = chars.map((chr) => (chr.codePointAt(0) + 127397).toString(16));
+    var baseFileName = hexEmojiChars.join('-');
 
+    return `https://osu.ppy.sh/assets/images/flags/${baseFileName}.svg`;
+}
+
+*/
 module.exports = {
     name: 'osu',
     category: "Game",
@@ -33,7 +43,7 @@ module.exports = {
         const { MessageAttachment } = require('discord.js');
         const path = require('path')
         const fetch = require('node-fetch')
-        const { Image, createCanvas, registerFont, loadImage } = require('canvas')
+        const { Image, createCanvas, registerFont } = require('canvas')
         const rootpath = path.resolve(__dirname, '..', '..', "assets");
         registerFont(path.join(rootpath, "font.ttf"), { family: 'Varela' })
         if (args.length == 0) {
@@ -141,8 +151,10 @@ module.exports = {
                                 img.onload = function () { ctx.drawImage(img, 0, 0) }
                                 img.src = path.join(rootpath, "backgroundcard.png")
                                 //avatar
-                                var avatarimg = await loadImage(js.avatar_url)
-                                ctx.drawImage(avatarimg, 45, 55, 277, 277)
+                                var avatarimg = await fetch(js.avatar_url)
+                                var avatarimg = await avatarimg.buffer()
+                                img.onload = function () { ctx.drawImage(img, 45, 55, 277, 277) }
+                                img.src = avatarimg
                                 img.onload = function () { ctx.drawImage(img, 45, 55) }
                                 img.src = path.join(rootpath, "avatarcornerround.png")
                                 //username
@@ -150,8 +162,10 @@ module.exports = {
                                 ctx.font = '63px Varela'
                                 ctx.fillText(username, 347, 56 + 63)
                                 //flag
-                                var flag = await loadImage(`https://osu.ppy.sh/images/flags/${countrycode}.png`)
-                                ctx.drawImage(flag, 350, 130, 60, 40)
+                                var flag = await fetch(`https://raw.githubusercontent.com/CuSO4-c3c/osu-flag/master/${countrycode}.png`)
+                                var flag = await flag.buffer()
+                                img.onload = function () { ctx.drawImage(img, 350, 130, 55, 45) }
+                                img.src = flag
                                 ctx.font = '40px Varela'
                                 ctx.fillText(country, 420, 127 + 40)
                                 //a,s,sh,ss,ssh
@@ -195,7 +209,7 @@ module.exports = {
                                 return message.channel.send(attachment)
                             } catch (e) {
                                 console.log(e)
-                                return message.channel.send('Can\'t complete the request with an error: '+ e)
+                                return message.channel.send('Can\'t complete the request with an error: ' + e)
                             }
                         }
                     }

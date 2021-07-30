@@ -150,8 +150,8 @@ module.exports = {
                                 ctx.font = '63px Varela'
                                 ctx.fillText(username, 347, 56 + 63)
                                 //flag
-                                var flag = await loadImage(`https://osu.ppy.sh/images/flags/${countrycode}.png`)
-                                ctx.drawImage(flag, 350, 130, 60, 40)
+                                var flag = await loadImage(`https://raw.githubusercontent.com/CuSO4-c3c/osu-flag/master/${countrycode}.png`)
+                                ctx.drawImage(flag, 350, 130, 55, 45) 
                                 ctx.font = '40px Varela'
                                 ctx.fillText(country, 420, 127 + 40)
                                 //a,s,sh,ss,ssh
