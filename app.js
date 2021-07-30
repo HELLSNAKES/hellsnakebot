@@ -170,7 +170,8 @@ const main = async () => {
       })
     });
     const distube = require('distube');
-    client.distube = new distube(client, { searchSongs: false, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: false, updateYouTubeDL: false })
+    client.distube = new distube(client, { searchSongs: true, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: true, updateYouTubeDL: false })
+    const status = (queue) => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
     client.distube
       .on('playSong', (message, queue, song) => message.channel.send(
         `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`,
@@ -178,11 +179,24 @@ const main = async () => {
       .on('addSong', (message, queue, song) => message.channel.send(
         `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`,
       ))
+      .on("playList", (message, queue, playlist, song) => message.channel.send(
+        `Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\`\n${status(queue)}`,
+      ))
+      .on("addList", (message, queue, playlist) => message.channel.send(
+        `Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`,
+      ))
+      .on("searchResult", (message, result) => {
+        let i = 0;
+        message.channel.send(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`);
+      })
+      .on("searchCancel", (message) => message.channel.send(`***Searching canceled***`))
       .on('error', (message, e) => {
         message.channel.send(`An error encountered: ${e}`)
       })
       .on('empty', (message, queue) => {
         message.channel.send(`***Channel is empty. Leaving the channel***`)
+      .on("finish", message => message.channel.send(`***No more song in queue***`))
+      .on("noRelated", message => message.channel.send(`***Can't find related video to play. Stop playing music***`))
       })
       .on('initQueue', (queue) => {
         queue.autoplay = false;
