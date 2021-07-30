@@ -80,7 +80,7 @@ const main = async () => {
     });
     client.on("message", async message => {
       const prefix = (config.prefix);
-      if (message.content == `<@!${client.user.id}>`) {
+      if(message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`) {
         message.reply(`**Use ${config.prefix}help to display all commands available.**`);
       }
       if (message.content.startsWith(prefix)) {
