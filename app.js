@@ -70,13 +70,15 @@ const main = async () => {
       setInterval(() => {
         const statuses = [
           `github.com/hellsnakes/hellsnakebot`,
+          `${client.guilds.cache.size} servers`,
+          `${client.channels.cache.size} channels`,
           `HELLSNAKEBOT| ${config.prefix}help`,
           `osu!`,
         ]
 
         const status = statuses[Math.floor(Math.random() * statuses.length)]
         client.user.setActivity(status, { type: "PLAYING" })
-      }, 600000)
+      }, 60000)
     });
     client.on("message", async message => {
       const prefix = (config.prefix);
@@ -195,7 +197,6 @@ const main = async () => {
       })
       .on('empty', (message, queue) => {
         message.channel.send(`***Channel is empty. Leaving the channel***`)
-      .on("finish", message => message.channel.send(`***No more song in queue***`))
       .on("noRelated", message => message.channel.send(`***Can't find related video to play. Stop playing music***`))
       })
       .on('initQueue', (queue) => {
