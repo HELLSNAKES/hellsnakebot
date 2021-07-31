@@ -197,7 +197,6 @@ const main = async () => {
       })
       .on('empty', (message, queue) => {
         message.channel.send(`***Channel is empty. Leaving the channel***`)
-      .on("noRelated", message => message.channel.send(`***Can't find related video to play. Stop playing music***`))
       })
       .on('initQueue', (queue) => {
         queue.autoplay = false;
