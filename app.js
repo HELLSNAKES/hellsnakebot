@@ -70,8 +70,8 @@ const main = async () => {
       setInterval(() => {
         const statuses = [
           `github.com/hellsnakes/hellsnakebot`,
-          `${client.guilds.cache.size} servers`,
-          `${client.channels.cache.size} channels`,
+          `with ${client.guilds.cache.size} servers`,
+          `with ${client.channels.cache.size} channels`,
           `HELLSNAKEBOT| ${config.prefix}help`,
           `osu!`,
         ]
