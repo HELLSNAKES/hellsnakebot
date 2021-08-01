@@ -2,7 +2,7 @@ const { Client, Collection, MessageEmbed } = require("discord.js");
 const fs = require("fs");
 const childProcess = require('child_process')
 if (!fs.existsSync('./config.json')) {
-  console.log('[Config Handlers]',"config.json doesn't exists. Attemping to create a new one...")
+  console.log('[Config Handlers]', "config.json doesn't exists. Attemping to create a new one...")
   fs.writeFileSync('./config.json', `{
     "autoUpdate": true,
     "token": "",
@@ -23,7 +23,7 @@ if (!fs.existsSync('./database/data.json')) {
     mode: 0o777,
     recursive: true
   })
-  console.log('[Data Handlers]','owo, data file not found.')
+  console.log('[Data Handlers]', 'owo, data file not found.')
   fs.writeFileSync('./database/data.json', '{}')
 }
 var config = JSON.parse(fs.readFileSync('./config.json').toString());
@@ -43,7 +43,7 @@ const defaultconfig = {
 }
 for (let a in defaultconfig) {
   if (config[a] == undefined) {
-    console.log('[Config Handlers]',a, 'was not found in config.json. Adding with defautl value' + defaultconfig[a] + '...')
+    console.log('[Config Handlers]', a, 'was not found in config.json. Adding with defautl value' + defaultconfig[a] + '...')
     config[a] = defaultconfig[a]
   }
   fs.writeFileSync('./config.json', JSON.stringify(config, null, 4))
@@ -82,7 +82,7 @@ const main = async () => {
     });
     client.on("message", async message => {
       const prefix = (config.prefix);
-      if(message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`) {
+      if (message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`) {
         message.reply(`**Use ${config.prefix}help to display all commands available.**`);
       }
       if (message.content.startsWith(prefix)) {
@@ -101,7 +101,7 @@ const main = async () => {
             let embed = {}
             for (let b in a) {
               if (a[b] != null && (a[b] != [] && a[b].length != 0) && a[b] != {}) {
-                  embed[b] = a[b]
+                embed[b] = a[b]
               }
             }
             console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an embed in ${message.channel.id}: ${JSON.stringify(embed, null, 2)}`)
@@ -135,6 +135,14 @@ const main = async () => {
     const xpfile = require('./database/xp.json');
     client.on("message", function (message) {
       if (message.author.bot) return;
+      if (client.data.levelconfig == undefined) {
+        client.data.levelconfig = {};
+        client.updateData();
+      }
+      if (client.data.levelconfig[message.author.id] == undefined) {
+        client.data.levelconfig[message.author.id] = true
+        client.updateData()
+      }
       var addXP = Math.floor(Math.random() * 8) + 3
 
       if (!xpfile[message.author.id]) {
@@ -156,6 +164,16 @@ const main = async () => {
         xpfile[message.author.id].reqxp *= 1.25
         xpfile[message.author.id].reqxp = Math.floor(xpfile[message.author.id].reqxp)
         xpfile[message.author.id].level += 1
+
+        let member = message.mentions.users.first() || message.author
+        if (client.data.levelconfig[message.author.id] == true) {
+          const embed = new MessageEmbed()
+            .setColor('RANDOM')
+            .setTitle(`${member.tag}`)
+            .setDescription("You Are Now Level **" + xpfile[message.author.id].level + "**!")
+            .setImage('https://emoji.gg/assets/emoji/9104-nekodance.gif')
+          message.channel.send(embed).then(embed => { embed.delete({ timeout: 10000 }) })
+        }
       }
       fs.writeFile("./database/xp.json", JSON.stringify(xpfile), function (err) {
         if (err) console.log(err)
