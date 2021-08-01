@@ -156,16 +156,6 @@ const main = async () => {
         xpfile[message.author.id].reqxp *= 1.25
         xpfile[message.author.id].reqxp = Math.floor(xpfile[message.author.id].reqxp)
         xpfile[message.author.id].level += 1
-
-        let member = message.mentions.users.first() || message.author
-
-        const embed = new MessageEmbed()
-          .setColor('RANDOM')
-          .setTitle(`${member.tag}`)
-          .setDescription("You Are Now Level **" + xpfile[message.author.id].level + "**!")
-          .setImage('https://emoji.gg/assets/emoji/9104-nekodance.gif')
-        message.channel.send(embed).then(embed => { embed.delete({ timeout: 10000 }) })
-
       }
       fs.writeFile("./database/xp.json", JSON.stringify(xpfile), function (err) {
         if (err) console.log(err)
