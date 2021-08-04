@@ -117,13 +117,16 @@ const main = async () => {
       if (cmd.length === 0) return;
       let command = client.commands.get(cmd);
       if (!command) command = client.commands.get(client.aliases.get(cmd));
-      if (command)
-        if (Timeout.has(`${command.name}${message.author.id}`)) return message.channel.send(`You are on a \`${ms(Timeout.get(`${command.name}${message.author.id}`) - Date.now(), { long: true })}\` cooldown.`)
-      command.run(client, message, args);
-      Timeout.set(`${command.name}${message.author.id}`, Date.now() + command.timeout)
-      setTimeout(() => {
-        Timeout.delete(`${command.name}${message.author.id}`)
-      }, command.timeout)
+      if (command) {
+        if (command.run != undefined) {
+          if (Timeout.has(`${command.name}${message.author.id}`)) return message.channel.send(`You are on a \`${ms(Timeout.get(`${command.name}${message.author.id}`) - Date.now(), { long: true })}\` cooldown.`)
+          command.run(client, message, args);
+          Timeout.set(`${command.name}${message.author.id}`, Date.now() + command.timeout)
+          setTimeout(() => {
+            Timeout.delete(`${command.name}${message.author.id}`)
+          }, command.timeout)
+        } else return;
+      }
     });
     if (!fs.existsSync('./database/xp.json')) {
       fs.mkdirSync('./database', {
