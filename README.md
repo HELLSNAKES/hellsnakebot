@@ -28,5 +28,5 @@ Released under the [MIT License](https://github.com/HELLSNAKES/hellsnakebot/blob
 * Emilia -  [Facebook](https://www.facebook.com/profile.php?id=100066295651777) - [Github](https://github.com/CuSO4-c3c) - [Discord](https://discord.com/users/783709260663750657)
 ## 👥 Contributors
 <a href="https://github.com/HELLSNAKES/hellsnakebot/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=HELLSNAKES/hellsnakebot" />
+  <img src="https://contrib.rocks/image?repo=hellsnakes/hellsnakebot" />
 </a>
