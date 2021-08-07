@@ -1,17 +1,32 @@
-const SnakeGame = require('snakecord');
+const { Snake } = require("weky");
 const Discord = require("discord.js")
+require('@weky/inlinereply');
+
 module.exports = {
     name: "snake",
     description: "Let play snake game",
     category: "Game",
-    timeout: 50000,
+    timeout: 5000,
     usage: "[command]",
      run: async (client, message, args) => {
-    const snakeGame = new SnakeGame({
-    title: 'Snake Game',
-    color: "GREEN",
-    timestamp: true,
-    gameOverTitle: "Game Over",
-    })
-    snakeGame.newGame(message);
+        await Snake({
+            message: message,
+            embed: {
+                title: 'Snake Game',
+                description: 'GG, you scored **{{score}}** points!',
+                color: '#7289da',
+                timestamp: true,
+            },
+            emojis: {
+                empty: '⬛',
+                snakeBody: '♿',
+                food: '💩',
+                up: '⬆️',
+                right: '⬅️',
+                down: '⬇️',
+                left: '➡️',
+            },
+            othersMessage: 'Only <@{{author}}> can use the buttons!',
+            buttonText: 'Cancel',
+        });
 }}
