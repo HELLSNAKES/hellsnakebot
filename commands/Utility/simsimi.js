@@ -7,7 +7,7 @@ module.exports = {
     run: async(client, message, args) => {
             const text = args.join(' ')
             if(!text) return message.channel.send('Usage [command] + [text]')
-            const url = `https://api.simsimi.net/v1/?text=${encodeURIComponent(text)}&lang=vi_VN`
+            const url = `https://tuanxuong.com/api/simsimi/index.php?text=${encodeURIComponent(text)}` //tks lanh han seola
             let response
             try{
                 response = await fetch(url).then(res => res.json())
@@ -15,7 +15,7 @@ module.exports = {
             catch(e) {
                 return message.reply('An Error Occured, Try Again Later.')
             }
-            message.channel.send(response.success)
+            message.reply(response.response)
     }
 }
    
