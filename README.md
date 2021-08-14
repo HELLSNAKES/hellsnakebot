@@ -4,6 +4,7 @@
 </h1>
 <p align="center">
     <img alt="Size" src="https://img.shields.io/github/languages/code-size/HELLSNAKES/hellsnakebot">
+    <img alt="discord-ver" src="https://img.shields.io/badge/discord.js-v12.5.3-blue">
     <img alt="Stars" src="https://img.shields.io/github/stars/HELLSNAKES/hellsnakebot">
     <img alt="Fork" src="https://img.shields.io/github/forks/HELLSNAKES/hellsnakebot">
     <img alt="License" src="https://img.shields.io/github/license/HELLSNAKES/hellsnakebot">
