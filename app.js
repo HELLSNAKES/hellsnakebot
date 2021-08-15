@@ -72,6 +72,7 @@ const main = async () => {
           `github.com/hellsnakes/hellsnakebot`,
           `with ${client.guilds.cache.size} servers`,
           `with ${client.channels.cache.size} channels`,
+          `with ${client.users.cache.size} users`,
           `HELLSNAKEBOT| ${config.prefix}help`,
           `osu!`,
         ]

@@ -25,6 +25,11 @@ const os = require('os');
                         inline: true
                     },
                     {
+                        name: '👥 Users',
+                        value: `Serving ${client.users.cache.size} users.`,
+                        inline: true
+                    },
+                    {
                         name: '🎈 Join Date',
                         value: client.user.createdAt.toLocaleDateString("en-us"),
                         inline: true
