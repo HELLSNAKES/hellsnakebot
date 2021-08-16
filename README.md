@@ -37,7 +37,26 @@ Released under the [MIT License](https://github.com/HELLSNAKES/hellsnakebot/blob
 ## ✉Contact
 * HELLSNAKE - [Facebook](https://www.facebook.com/hellsnake98) - [Discord](https://discord.com/users/628633598001414165) - hellsnakess@hotmail.com
 * Emilia -  [Facebook](https://www.facebook.com/profile.php?id=100066295651777) - [Github](https://github.com/CuSO4-c3c) - [Discord](https://discord.com/users/783709260663750657)
-## 👥Contributors
-<a href="https://github.com/HELLSNAKES/hellsnakebot/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=hellsnakes/hellsnakebot" />
-</a>
+
+
+## ✨ Contributors 
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://compiled.social/HELLSNAKE"><img src="https://avatars.githubusercontent.com/u/63496374?v=4?s=100" width="100px;" alt=""/><br /><sub><b>HELLSNAKE</b></sub></a><br /><a href="https://github.com/hellsnakes/hellsnakebot/commits?author=HELLSNAKES" title="Code">💻</a> <a href="#data-HELLSNAKES" title="Data">🔣</a> <a href="#projectManagement-HELLSNAKES" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://github.com/Hiyoriii"><img src="https://avatars.githubusercontent.com/u/69383963?v=4?s=100" width="100px;" alt=""/><br /><sub><b>allehS</b></sub></a><br /><a href="https://github.com/hellsnakes/hellsnakebot/commits?author=Hiyoriii" title="Code">💻</a> <a href="#data-Hiyoriii" title="Data">🔣</a> <a href="#projectManagement-Hiyoriii" title="Project Management">📆</a> <a href="https://github.com/hellsnakes/hellsnakebot/commits?author=Hiyoriii" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/CuSO4-c3c"><img src="https://avatars.githubusercontent.com/u/77104443?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amnesia</b></sub></a><br /><a href="https://github.com/hellsnakes/hellsnakebot/commits?author=CuSO4-c3c" title="Code">💻</a> <a href="#data-CuSO4-c3c" title="Data">🔣</a> <a href="#projectManagement-CuSO4-c3c" title="Project Management">📆</a> <a href="https://github.com/hellsnakes/hellsnakebot/commits?author=CuSO4-c3c" title="Tests">⚠️</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

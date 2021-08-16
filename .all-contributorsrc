@@ -1,0 +1,50 @@
+{
+  "projectName": "hellsnakebot",
+  "projectOwner": "hellsnakes",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "gitmoji",
+  "contributors": [
+    {
+      "login": "HELLSNAKES",
+      "name": "HELLSNAKE",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63496374?v=4",
+      "profile": "https://compiled.social/HELLSNAKE",
+      "contributions": [
+        "code",
+        "data",
+        "projectManagement"
+      ]
+    },
+    {
+      "login": "Hiyoriii",
+      "name": "allehS",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69383963?v=4",
+      "profile": "https://github.com/Hiyoriii",
+      "contributions": [
+        "code",
+        "data",
+        "projectManagement",
+        "test"
+      ]
+    },
+    {
+      "login": "CuSO4-c3c",
+      "name": "Amnesia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/77104443?v=4",
+      "profile": "https://github.com/CuSO4-c3c",
+      "contributions": [
+        "code",
+        "data",
+        "projectManagement",
+        "test"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

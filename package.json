@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "repository": {
     "type": "git",
@@ -46,6 +48,7 @@
     "ytdl-core": "^4.9.1"
   },
   "devDependencies": {
+    "all-contributors-cli": "^6.20.0",
     "eslint": "^7.31.0"
   },
   "engines": {
