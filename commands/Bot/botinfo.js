@@ -15,6 +15,11 @@ const os = require('os');
                 .setColor('RANDOM')
                 .addFields(
                     {
+                        name: '🔰 Author',
+                        value: `${message.client.users.cache.get(require('../../config.json').Admin)?.tag}`,
+                        inline: true
+                    },
+                    {
                         name: '🌐 Servers',
                         value: `Serving ${client.guilds.cache.size} servers.`,
                         inline: true
@@ -55,10 +60,15 @@ const os = require('os');
                         inline: true
                     },
                     {
+                        name: '⏳ Memory',
+                        value: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}mb`,
+                        inline: true
+                    },
+                    {
                         name: '🖥 CPU',
                         value: `\`\`\`md\n${os.cpus().map(i => `${i.model}`)[0]}\`\`\``,
                         inline: true
-                    }
+                    },
                 )   
             await message.channel.send(embed)
         }
