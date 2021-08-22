@@ -3,7 +3,7 @@ const progressbar = require('string-progressbar');
 
 module.exports = {
     name: "volume",
-    category : "music",
+    category : "Music",
     aliases : ['v'],
     description : "Change the music player's volume.",
     timeout: 3000,
