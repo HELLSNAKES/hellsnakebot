@@ -8,9 +8,9 @@ module.exports = {
   run: async (client, message, args) => {
     if(message.author.id !== Admin) return message.channel.send('Insufficient permission!!')
     if (!args[0]) return message.channel.send('Give a command');
+    let command = args[0].toLowerCase();
     var commandinfo = client.commands.get(command);
     var category = commandinfo.category
-    let command = args[0].toLowerCase();
     
     try {
         delete require.cache[require.resolve(`../../commands/${category}/${command}.js`)];
