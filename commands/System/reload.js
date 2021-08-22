@@ -7,8 +7,7 @@ module.exports = {
   usage: "[command] + [category] + [command]",
   run: async (client, message, args) => {
     if(message.author.id !== Admin) return message.channel.send('Insufficient permission!!')
-    if (!args[0]) return message.channel.send('Give a category');
-    if (!args[1]) return message.channel.send('Give a command');
+    if (!args[0]) return message.channel.send('Give a command');
     var commandinfo = client.commands.get(command);
     var category = commandinfo.category
     let command = args[0].toLowerCase();
