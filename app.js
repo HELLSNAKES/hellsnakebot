@@ -185,14 +185,26 @@ const main = async () => {
     });
     const distube = require('distube');
     client.distube = new distube(client, { searchSongs: true, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: true, updateYouTubeDL: false })
-    const status = (queue) => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
+    const status = (queue) => `Volume: \`${queue.volume}%\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
     client.distube
-      .on('playSong', (message, queue, song) => message.channel.send(
-        `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`,
-      ))
-      .on('addSong', (message, queue, song) => message.channel.send(
-        `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`,
-      ))
+      .on("playSong", (message, queue, song) => {
+        const embed = new MessageEmbed()
+        .setTitle('🎵 Started Playing')
+        .setDescription(`[${song.name}](${song.url})`)
+        .addField('**Views:**', song.views)
+        .addField('**Duration:**', song.formattedDuration)
+        .addField('**Status**', status(queue))
+        .setThumbnail(song.thumbnail)
+        .setColor("RANDOM")
+        message.channel.send(embed)
+      })
+      .on('addSong', (message, queue, song) => {
+         const embed = new MessageEmbed()
+         .setTitle(`✅ Added song to queue`)
+         .setDescription(`\`${song.name}\` - \`${song.formattedDuration}\` - Requested by ${song.user}`)
+         .setColor("RANDOM")
+        message.channel.send(embed);
+      })   
       .on("playList", (message, queue, playlist, song) => message.channel.send(
         `Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\`\n${status(queue)}`,
       ))
