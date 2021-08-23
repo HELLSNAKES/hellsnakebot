@@ -19,7 +19,7 @@ module.exports = {
             client.distube.setVolume(message, amount);
             var total = 100;
             var current = amount;
-            let bar = progressbar.splitBar(total, current, 30, "▬", "🔘")[0];
+            let bar = progressbar.splitBar(total, current, 27, "▬", "🔘")[0];
             message.channel.send(`Set the new volume to ${amount}%.`);
             message.channel.send(bar);
         }
