@@ -189,9 +189,11 @@ const main = async () => {
     client.distube
       .on("playSong", (message, queue, song) => {
         const embed = new MessageEmbed()
-        .setTitle('🎵 Started Playing')
+        .setTitle('<:headphones:879518595602841630> Started Playing')
         .setDescription(`[${song.name}](${song.url})`)
         .addField('**Views:**', song.views)
+        .addField('<:like:879371469132562552>', song.likes)
+        .addField('<:dislike:879371468817973299>', song.dislikes)
         .addField('**Duration:**', song.formattedDuration)
         .addField('**Status**', status(queue))
         .setThumbnail(song.thumbnail)
@@ -200,7 +202,7 @@ const main = async () => {
       })
       .on('addSong', (message, queue, song) => {
          const embed = new MessageEmbed()
-         .setTitle(`✅ Added song to queue`)
+         .setTitle(`<:addsong:879518595665780746> Added song to queue`)
          .setDescription(`\`${song.name}\` - \`${song.formattedDuration}\` - Requested by ${song.user}`)
          .setColor("RANDOM")
         message.channel.send(embed);
