@@ -14,7 +14,6 @@ if (!fs.existsSync('./config.json')) {
       "typeof client_id": "number",
       "typeof client_secret": "string"
     },
-    "youtubeAPI": "",
     "oauthv2link": ""
   }`)
 }
@@ -38,7 +37,6 @@ const defaultconfig = {
     "typeof client_id": "number",
     "typeof client_secret": "string"
   },
-  "youtubeAPI": "",
   "oauthv2link": ""
 }
 for (let a in defaultconfig) {
