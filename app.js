@@ -222,8 +222,12 @@ const main = async () => {
       .on('empty', (message, queue) => {
         message.channel.send(`***Channel is empty. Leaving the channel***`)
       })
+      .on('finish', (message, queue) => {
+        message.channel.send(`***No more song in queue. Leaving the channel***`)
+      })
       .on('initQueue', (queue) => {
         queue.autoplay = false;
+        queue.volume = 50;
       });
     client.login(config.token);
   } else {
