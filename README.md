@@ -15,7 +15,6 @@
 2. Git: **[Link](https://git-scm.com)**
 3. Discord Bot Token: **[Link](https://discord.com/developers/applications)**
 4. OsuClientApi: **[Link](https://osu.ppy.sh/home/account/edit#new-oauth-application)**
-5. YouTube API v3: **[Link](https://console.cloud.google.com/apis/library/youtube.googleapis.com)**
 ## ⚙️Setting
 Note: Please run `install_tools.bat` (Windows) or `install_tools.sh` (Linux) if your machine's architecture isn't x64.
 ```
