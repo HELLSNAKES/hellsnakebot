@@ -1,4 +1,5 @@
 const { Client, Collection, MessageEmbed } = require("discord.js");
+const { DiscordUNO } = require("discord-uno");
 const fs = require("fs");
 const childProcess = require('child_process')
 if (!fs.existsSync('./config.json')) {
@@ -57,6 +58,7 @@ const main = async () => {
       disableEveryone: true
     });
     require('discord-buttons')(client);
+    client.discordUNO = new DiscordUNO();
     client.commands = new Collection();
     client.aliases = new Collection();
     client.categories = fs.readdirSync("./commands/");
