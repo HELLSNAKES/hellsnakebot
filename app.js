@@ -81,10 +81,24 @@ const main = async () => {
         client.user.setActivity(status, { type: "PLAYING" })
       }, 60000)
     });
+    if (!fs.existsSync('./database/setprefix.json')) {
+      fs.mkdirSync('./database', {
+        mode: 0o777,
+        recursive: true
+      })
+      fs.appendFileSync('./database/setprefix.json', '{}')
+    };
     client.on("message", async message => {
-      const prefix = (config.prefix);
+      //custom prefix
+      let prefixes = JSON.parse(fs.readFileSync("./database/setprefix.json", "utf8"))
+      if(!prefixes[message.guild.id]){
+      prefixes[message.guild.id] = {
+        prefixes: config.prefix
+      };
+    }
+      let prefix = prefixes[message.guild.id].prefixes;
       if (message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`) {
-        message.reply(`**Use ${config.prefix}help to display all commands available.**`);
+        message.reply(`**Use ${prefixes[message.guild.id].prefixes}help to display all commands available.**`);
       }
       if (message.content.startsWith(prefix)) {
         console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
