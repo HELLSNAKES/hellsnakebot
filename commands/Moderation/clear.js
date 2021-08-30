@@ -24,6 +24,6 @@ module.exports = {
             .setDescription(`successfully deleted ${deleteAmount}`)
             .setFooter(message.author.username, message.author.displayAvatarURL())
             .setColor('RANDOM')
-        await message.channel.send(embed)
+        await message.channel.send(embed).then(embed => { embed.delete({ timeout: 5000 }) })
     }
 }
