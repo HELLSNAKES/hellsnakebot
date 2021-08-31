@@ -23,7 +23,7 @@ module.exports = {
         .setColor('RANDOM')
         .setThumbnail(client.user.displayAvatarURL())
         .setTitle('<:icon:878934851913384006> Custom Prefix')
-        .setDescription(`***Current server prefix(es) ${args[0]}***`)
+        .setDescription(`***Current server prefix(es):*** \`${args[0]}\``)
         message.channel.send(embed)
      }  
 }
