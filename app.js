@@ -66,7 +66,7 @@ const main = async () => {
       require(`./handlers/${handler}`)(client);
     });
     client.on('ready', () => {
-      console.log(`Logged in as ${client.user.tag}!`);
+      console.log('\x1b[33m%s\x1b[0m',`Logged in as ${client.user.tag}!`);
       setInterval(() => {
         const statuses = [
           `github.com/hellsnakes/hellsnakebot`,
@@ -101,15 +101,15 @@ const main = async () => {
         message.reply(`**Use ${prefixes[message.guild.id].prefixes}help to display all commands available.**`);
       }
       if (message.content.startsWith(prefix)) {
-        console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
+        console.log('\x1b[32m%s\x1b[0m',`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
       } else {
         if (message.attachments.first() != undefined && message.content != '') {
-          console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
-          console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an attachment in ${message.channel.id}: ${message.attachments.first().url}`)
+          console.log('\x1b[32m%s\x1b[0m',`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
+          console.log('\x1b[32m%s\x1b[0m',`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an attachment in ${message.channel.id}: ${message.attachments.first().url}`)
         } else if (message.attachments.first() != undefined && message.content == '') {
-          console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an attachment in ${message.channel.id}: ${message.attachments.first().url}`)
+          console.log('\x1b[32m%s\x1b[0m',`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an attachment in ${message.channel.id}: ${message.attachments.first().url}`)
         } else if (message.attachments.first() == undefined && message.content != '') {
-          console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
+          console.log('\x1b[32m%s\x1b[0m',`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) messaged in ${message.channel.id}: ${message.content}`);
         } else {
           if (message.embeds.length != 0) {
             let a = message.embeds[0]
@@ -119,7 +119,7 @@ const main = async () => {
                 embed[b] = a[b]
               }
             }
-            console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an embed in ${message.channel.id}: ${JSON.stringify(embed, null, 2)}`)
+            console.log('\x1b[32m%s\x1b[0m',`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) sent an embed in ${message.channel.id}: ${JSON.stringify(embed, null, 2)}`)
           }
         }
       }

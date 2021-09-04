@@ -23,8 +23,8 @@ module.exports = (client) => {
             if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
         }
     });
-    console.log(table.toString());
-    console.log("Welcome to HELLSNAKE-BOT|https://github.com/hellsnakes")
-	console.log("Logging into Bot User...");
+    console.log('\x1b[36m%s\x1b[0m',table.toString());
+    console.log('\x1b[34m%s\x1b[0m',"Welcome to HELLSNAKE-BOT|https://github.com/hellsnakes")
+	console.log('\x1b[34m%s\x1b[0m',"Logging into Bot User...");
 
 }
