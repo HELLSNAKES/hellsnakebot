@@ -143,60 +143,6 @@ const main = async () => {
         } else return;
       }
     });
-    if (!fs.existsSync('./database/xp.json')) {
-      fs.mkdirSync('./database', {
-        mode: 0o777,
-        recursive: true
-      })
-      fs.appendFileSync('./database/xp.json', '{}')
-    }
-    const xpfile = require('./database/xp.json');
-    client.on("message", function (message) {
-      if (message.author.bot) return;
-      if (client.data.levelconfig == undefined) {
-        client.data.levelconfig = {};
-        client.updateData();
-      }
-      if (client.data.levelconfig[message.author.id] == undefined) {
-        client.data.levelconfig[message.author.id] = true
-        client.updateData()
-      }
-      var addXP = Math.floor(Math.random() * 8) + 3
-
-      if (!xpfile[message.author.id]) {
-        xpfile[message.author.id] = {
-          xp: 0,
-          level: 1,
-          reqxp: 100
-        }
-
-        fs.writeFile("./database/xp.json", JSON.stringify(xpfile), function (err) {
-          if (err) console.log(err)
-        })
-      }
-
-      xpfile[message.author.id].xp += addXP
-
-      if (xpfile[message.author.id].xp > xpfile[message.author.id].reqxp) {
-        xpfile[message.author.id].xp -= xpfile[message.author.id].reqxp
-        xpfile[message.author.id].reqxp *= 1.25
-        xpfile[message.author.id].reqxp = Math.floor(xpfile[message.author.id].reqxp)
-        xpfile[message.author.id].level += 1
-
-        let member = message.mentions.users.first() || message.author
-        if (client.data.levelconfig[message.author.id] == true) {
-          const embed = new MessageEmbed()
-            .setColor('RANDOM')
-            .setTitle(`${member.tag}`)
-            .setDescription("You Are Now Level **" + xpfile[message.author.id].level + "**!")
-            .setImage('https://emoji.gg/assets/emoji/9104-nekodance.gif')
-          message.channel.send(embed).then(embed => { embed.delete({ timeout: 10000 }) })
-        }
-      }
-      fs.writeFile("./database/xp.json", JSON.stringify(xpfile), function (err) {
-        if (err) console.log(err)
-      })
-    });
     const distube = require('distube');
     client.distube = new distube(client, { searchSongs: true, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: true, updateYouTubeDL: false })
     const status = (queue) => `Volume: \`${queue.volume}%\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
