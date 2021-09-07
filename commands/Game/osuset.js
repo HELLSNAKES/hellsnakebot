@@ -5,12 +5,10 @@ module.exports = {
     usage: "[command + username]",
     author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
-        if(client.data.osu == undefined) {
-            client.data.osu = {}
-            client.updateData()
-        }
         const fetch = require('node-fetch')
         const config = require('../../config.json')
+        const osusetShema = require('../../schemas/osusets')
+
         if(args.length == 0) {
             return message.channel.send(`Please specify a username!`)
         } else {
@@ -60,8 +58,21 @@ module.exports = {
                     if (js.id == undefined) {
                         message.channel.send(`:red_circle: \`${decodeURIComponent(username)}\` was not found on osu! Bancho server.`)
                     } else {
-                        client.data.osu[message.author.id] = js.username
-                        client.updateData()
+                        data = await osusetShema.findOne({
+                            userid: message.author.id,
+                        })
+                        if(!data) {
+                            let data = await osusetShema.create({
+                                userid: message.author.id,
+                                name: js.username,
+                            })
+                               data.save()
+                        } else {
+                            await osusetShema.findOneAndUpdate({
+                                userid: message.author.id,
+                                name: js.username,
+                            })
+                        }
                         message.channel.send(`:white_check_mark: \`${message.author.username}\`'s osu!username is now \`${js.username}\`.`)
                     }
                 }

@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const fs = require('fs')
 module.exports = {
     name: 'setprefix',
     aliases : ["prefix"],
@@ -10,21 +9,34 @@ module.exports = {
      run: async (client, message, args) => {
         if (!message.member.permissions.has("MANAGE_MESSAGES"))
         return message.channel.send(`Insufficient permission!!`);
-        if(!args[0]) 
-        return message.channel.send('usage [command] + [prefix]')
-        let prefixes = JSON.parse(fs.readFileSync("./database/setprefix.json", "utf8"));
-
-        prefixes[message.guild.id] = {
-            prefixes: args[0]
-        };
-        fs.writeFile("./database/setprefix.json", JSON.stringify(prefixes), function (err) {
-            if (err) console.log(err)
-          })
-        let embed = new Discord.MessageEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(client.user.displayAvatarURL())
-        .setTitle('<:icon:878934851913384006> Custom Prefix')
-        .setDescription(`***Current server prefix(es):*** \`${args[0]}\``)
-        message.channel.send(embed)
-     }  
+        const pre = await args.join(" ")
+        if(!pre) return message.channel.send("Usage [command] + [prefix]!")     
+    
+        let data;
+        try {
+            data = await prefixSchema.findOne({
+              Guild : message.guild.id,
+            })
+            if(!data) {
+                let data = await prefixSchema.create({
+                    Guild : message.guild.id,
+                    Prefix : pre,
+                })
+                   data.save()
+            } else {
+                await prefixSchema.findOneAndUpdate({
+                    Guild : message.guild.id,
+                    Prefix : pre,
+                })
+            }
+            let embed = new Discord.MessageEmbed()
+                  .setColor('RANDOM')
+                  .setThumbnail(client.user.displayAvatarURL())
+                  .setTitle('<:icon:878934851913384006> Custom Prefix')
+                  .setDescription(`***Current server prefix(es):*** \`${pre}\``)
+                   message.channel.send(embed)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }

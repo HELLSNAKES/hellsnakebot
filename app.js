@@ -2,6 +2,7 @@ const { Client, Collection, MessageEmbed } = require("discord.js");
 const { DiscordUNO } = require("discord-uno");
 const fs = require("fs");
 const childProcess = require('child_process')
+const mongoose = require('mongoose');
 if (!fs.existsSync('./config.json')) {
   console.log('[Config Handlers]', "config.json doesn't exists. Attemping to create a new one...")
   fs.writeFileSync('./config.json', `{
@@ -15,16 +16,10 @@ if (!fs.existsSync('./config.json')) {
       "typeof client_id": "number",
       "typeof client_secret": "string"
     },
+    "mongoPath": "",
+    "youtubecookie": "",
     "oauthv2link": ""
   }`)
-}
-if (!fs.existsSync('./database/data.json')) {
-  fs.mkdirSync('./database', {
-    mode: 0o777,
-    recursive: true
-  })
-  console.log('[Data Handlers]', 'owo, data file not found.')
-  fs.writeFileSync('./database/data.json', '{}')
 }
 var config = JSON.parse(fs.readFileSync('./config.json').toString());
 const defaultconfig = {
@@ -38,6 +33,8 @@ const defaultconfig = {
     "typeof client_id": "number",
     "typeof client_secret": "string"
   },
+  "mongoPath": "",
+  "youtubecookie": "",
   "oauthv2link": ""
 }
 for (let a in defaultconfig) {
@@ -62,7 +59,7 @@ const main = async () => {
     client.commands = new Collection();
     client.aliases = new Collection();
     client.categories = fs.readdirSync("./commands/");
-    ['data', "command"].forEach(handler => {
+    ["command"].forEach(handler => {
       require(`./handlers/${handler}`)(client);
     });
     client.on('ready', () => {
@@ -80,27 +77,31 @@ const main = async () => {
         const status = statuses[Math.floor(Math.random() * statuses.length)]
         client.user.setActivity(status, { type: "PLAYING" })
       }, 60000)
-    });
-    if (!fs.existsSync('./database/setprefix.json')) {
-      fs.mkdirSync('./database', {
-        mode: 0o777,
-        recursive: true
-      })
-      fs.appendFileSync('./database/setprefix.json', '{}')
-    };
-    client.on("message", async message => {
-      //custom prefix
-      let prefixes = JSON.parse(fs.readFileSync("./database/setprefix.json", "utf8"))
-      if(!prefixes[message.guild.id]){
-      prefixes[message.guild.id] = {
-        prefixes: config.prefix
-      };
-    }
-      let prefix = prefixes[message.guild.id].prefixes;
-      if (message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`) {
-        message.reply(`**Use ${prefixes[message.guild.id].prefixes}help to display all commands available.**`);
+// Database Connect
+mongoose.connect(config.mongoPath, { useUnifiedTopology: true, useNewUrlParser: true})
+	.then(() => console.log('\x1b[33m%s\x1b[0m',`Connected to Mongo`))
+	.catch((error) => console.log(error));
+});
+const prefixSchema = require('./schemas/prefixcustoms')
+  client.prefix = async function(message) {
+          let custom;
+  
+          const data = await prefixSchema.findOne({ Guild : message.guild.id })
+              .catch(err => console.log(err))
+          
+          if(data) {
+              custom = data.Prefix;
+          } else {
+              custom = config.prefix;
+          }
+          return custom;
       }
-      if (message.content.startsWith(prefix)) {
+    client.on("message", async message => {
+      const prefixes = await client.prefix(message)
+      if (message.content === `<@${client.user.id}>` || message.content === `<@!${client.user.id}>`) {
+        message.reply(`**Use ${prefixes}help to display all commands available.**`);
+      }
+      if (message.content.startsWith(prefixes)) {
         console.log('\x1b[32m%s\x1b[0m',`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message.author.username} (${message.author.id}) issued command in ${message.channel.id}: ${message.content}`);
       } else {
         if (message.attachments.first() != undefined && message.content != '') {
@@ -125,9 +126,9 @@ const main = async () => {
       }
       if (message.author.bot) return;
       if (!message.guild) return;
-      if (!message.content.startsWith(prefix)) return;
+      if (!message.content.startsWith(prefixes)) return;
       if (!message.member) message.member = await message.guild.fetchMember(message);
-      const args = message.content.slice(prefix.length).trim().split(/ +/g);
+      const args = message.content.slice(prefixes.length).trim().split(/ +/g);
       const cmd = args.shift().toLowerCase();
       if (cmd.length === 0) return;
       let command = client.commands.get(cmd);
@@ -142,9 +143,9 @@ const main = async () => {
           }, command.timeout)
         } else return;
       }
-    });
+});
     const distube = require('distube');
-    client.distube = new distube(client, { searchSongs: true, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: true, updateYouTubeDL: false })
+    client.distube = new distube(client, { searchSongs: true, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: true, updateYouTubeDL: false, youtubeCookie: config.youtubecookie })
     const status = (queue) => `Volume: \`${queue.volume}%\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
     client.distube
       .on("playSong", (message, queue, song) => {

@@ -37,15 +37,17 @@ module.exports = {
         const { Image, createCanvas, registerFont, loadImage } = require('canvas')
         const rootpath = path.resolve(__dirname, '..', '..', "assets");
         registerFont(path.join(rootpath, "font.ttf"), { family: 'Varela' })
+        const osusetShema = require('../../schemas/osusets')
+        data = await osusetShema.findOne({userid: message.author.id})
         if (args.length == 0) {
-            if (client.data.osu == undefined) {
-                client.data.osu = {}
+            if (data == undefined) {
+                data = {}
                 return message.channel.send(`Please specify a username!`)
             } else {
-                if (client.data.osu[message.author.id] == undefined) {
+                if (data.userid == undefined) {
                     return message.channel.send(`Please specify a username!`)
                 } else {
-                    var username = client.data.osu[message.author.id]
+                    var username = data.name
                 }
             }
         } else {
