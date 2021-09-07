@@ -1,3 +1,4 @@
+const prefixSchema = require('../../schemas/prefixcustoms')
 const Discord = require('discord.js');
 module.exports = {
     name: 'setprefix',
