@@ -7,6 +7,7 @@ module.exports = {
     description : "Send a message to Admin",
     timeout: 300000,
     usage: "[command]+[text]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
        const admin = client.users.cache.get(require('../../config.json').Admin);
        const bug = args.join(" ");

@@ -4,7 +4,8 @@ module.exports = {
     name: 'unmute',
     category: "Moderation",
     description: "Unmutes A User",
-    usage: "[command]+ [User] ",
+    usage: "[command]+ [User]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run : async(client, message, args) => {
         if (!message.member.permissions.has("MANAGE_MESSAGES"))
             return message.channel.send(`Insufficient permission!!`);

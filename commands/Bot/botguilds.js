@@ -5,6 +5,7 @@ module.exports = {
     category: "Bot",
     description: "Botguild",
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         if (message.author.id !== require('../../config.json').Admin)
             return message.channel.send('Insufficient permission!!')

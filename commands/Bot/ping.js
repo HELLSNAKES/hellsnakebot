@@ -5,6 +5,7 @@ module.exports = {
     category: "Bot",
     description: "Returns latency and API ping",
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
      run: async (client, message, args) => {
             let member = message.member;
             let embed = new Discord.MessageEmbed()

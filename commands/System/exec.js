@@ -6,6 +6,7 @@ module.exports = {
   category: "System",
   description: "Executes a process command.",
   usage: "[command] + [process command]",
+  author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
   run: async (client, message, args) => {
     if(message.author.id !== Admin) 
     return message.channel.send('Insufficient permission!!')

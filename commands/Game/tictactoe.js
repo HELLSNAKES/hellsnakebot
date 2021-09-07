@@ -5,6 +5,7 @@ module.exports = {
     category: "Game",
     description: "tictactoe",
     usage: "[command+user]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run : async(client, message, args) => {
         const member = message.mentions.members.first() 
             if(!member)  return  message.channel.send('Please mention a user!')

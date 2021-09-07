@@ -8,6 +8,7 @@ module.exports = {
     description: "calculator",
     usage: "[command]",
     timeout: 5000,
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
         await Calculator({
             message: message,

@@ -4,6 +4,7 @@ module.exports = {
     category: "Utility",
     description: "Talk with SimSimi",
     usage: "[command] + [text]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
             const text = args.join(' ')
             if(!text) return message.channel.send('Usage [command] + [text]')

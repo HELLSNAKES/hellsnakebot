@@ -5,6 +5,7 @@ module.exports = {
     category: "Fun",
     description: "How gay are you?",
     usage: "[command | user]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
         const mentionedMember = message.mentions.users.first()
         if (!mentionedMember) return message.channel.send('Please mention a user!')

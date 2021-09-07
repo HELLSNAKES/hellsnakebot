@@ -4,7 +4,8 @@ module.exports = {
     name: 'slow',
     category: "Moderation",
     description: "Sets Slowmode for a Channel",
-    usage: "[command]+ [time] ",
+    usage: "[command]+ [time]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         if (!message.member.permissions.has("MANAGE_MESSAGES"))
         return message.channel.send(`Insufficient permission!!`);

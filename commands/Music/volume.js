@@ -8,6 +8,7 @@ module.exports = {
     description : "Change the music player's volume.",
     timeout: 3000,
     usage: '[command]+[amount]',
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
         if(!message.member.voice.channel)
          return message.reply('Please join a voice channel!')

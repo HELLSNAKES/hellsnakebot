@@ -8,6 +8,7 @@ const os = require('os');
         description: "Send detailed info about the client",
         timeout: 10000,
         usage: "[command]",
+        author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
         run: async (client, message, args) => {
             const embed = new MessageEmbed()
                 .setThumbnail(client.user.displayAvatarURL())

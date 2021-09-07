@@ -6,6 +6,7 @@ module.exports = {
     category: "Utility",
     description: "Info user github",
     usage: "[command] + [user]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
       const user = args.join(' ')
       if(!user) return message.channel.send('Invalid user.')

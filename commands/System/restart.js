@@ -3,6 +3,7 @@ module.exports = {
     category: "System",
     description: "Restart the Bot",
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         try {
             if (message.author.id !== require('../../config.json').Admin) {

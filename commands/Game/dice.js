@@ -5,6 +5,7 @@ module.exports = {
     category: "Game",
     description: 'Dice roll command!',
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         const rolls = ["1", "2", "3", "4", "5", "6"];
         const roll = rolls[Math.floor(Math.random() * rolls.length)];

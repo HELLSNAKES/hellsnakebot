@@ -5,6 +5,7 @@ module.exports = {
   category: "System",
   description: "Reload command",
   usage: "[command] + [category] + [command]",
+  author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
   run: async (client, message, args) => {
     if(message.author.id !== Admin) return message.channel.send('Insufficient permission!!')
     if (!args[0]) return message.channel.send('Give a command');

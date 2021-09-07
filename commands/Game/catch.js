@@ -28,6 +28,7 @@ module.exports = {
     description: "Informations about the osu!player",
     timeout: 5000,
     usage: '[command + username]',
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async function (client, message, args) {
         var config = require('../../config.json')
         const { MessageAttachment } = require('discord.js');

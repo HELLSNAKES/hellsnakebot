@@ -7,6 +7,7 @@ module.exports = {
     description: "Play discord chess in vc!",
     timeout: 5000,
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
         client.discordTogether = new DiscordTogether(client);
         if (message.member.voice.channel) {

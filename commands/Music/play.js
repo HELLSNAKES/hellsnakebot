@@ -7,6 +7,7 @@ module.exports = {
     description: "play a song!",
     timeout: 3000,
     usage: "[command]+[url] or [song name]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run : async(client, message, args) => {
         if(!message.member.voice.channel) 
         return message.reply('Please join a voice channel!');

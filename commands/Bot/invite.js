@@ -6,6 +6,7 @@ module.exports = {
     description: "invite",
     timeout: 10000,
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         const config = require('../../config.json')
         if (config.oauthv2link == '') {

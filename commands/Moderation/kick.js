@@ -4,7 +4,8 @@ module.exports = {
     name: "kick",
     category: "Moderation",
     description: "Kick member",
-    usage: "[command]+[reason]+[user] ",
+    usage: "[command]+[reason]+[user]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
         const member = message.mentions.members.first()
         const reason = args.slice(1).join(" ")

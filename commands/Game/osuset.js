@@ -3,6 +3,7 @@ module.exports = {
     category: "Game",
     description: "Set the osu username.",
     usage: "[command + username]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         if(client.data.osu == undefined) {
             client.data.osu = {}

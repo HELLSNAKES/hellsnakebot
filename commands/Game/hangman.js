@@ -5,6 +5,7 @@ module.exports = {
     category: "Game",
     description: "hangman",
     usage: "[command+ [channel] + [word to guess]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run : async(client, message, args) => {
         if(!message.member.hasPermission("MANAGE_MESSAGES")) 
         return message.channel.send('Insufficient permission!!')

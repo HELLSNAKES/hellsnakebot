@@ -6,6 +6,7 @@ module.exports = {
   category: "Fun",
   description: "cuddle someone",
   usage: "[command]+[user]",
+  author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
   timeout: 5000,
   run: async(client, message, args) => {
     const member = message.mentions.members.first();

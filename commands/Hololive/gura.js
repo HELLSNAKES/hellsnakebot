@@ -7,6 +7,7 @@ module.exports = {
     description: "random gawr gura img",
     timeout: 3000,
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
             const url = `https://img-hololive-api.up.railway.app/gura`
             let response

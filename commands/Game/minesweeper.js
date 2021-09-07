@@ -8,6 +8,7 @@ module.exports = {
     description: "minesweeper",
     timeout: 10000,
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run : async(client, message, args) => {
         message.channel.send(mines(9, 9, 10, 'X', true));
     }

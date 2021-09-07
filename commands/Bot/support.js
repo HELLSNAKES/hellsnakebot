@@ -7,6 +7,7 @@ module.exports = {
     description: "support for bot",
     timeout: 5000,
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
        const embed = new Discord.MessageEmbed()
         .setTitle("Support")

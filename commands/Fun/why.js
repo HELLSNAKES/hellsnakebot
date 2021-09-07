@@ -7,6 +7,7 @@ module.exports = {
   description: "random why?",
   usage: "[command]",
   timeout: 5000,
+  author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
   run: async(client, message, args) => {
     let url = await neko.sfw.why()
     const embed = new Discord.MessageEmbed()

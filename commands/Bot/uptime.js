@@ -6,6 +6,7 @@ module.exports ={
     category: "Bot",
     timeout: 5000,
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
      run: async (client, message, args) => {     
      let days = Math.floor(client.uptime / 86400000);
      let hours = Math.floor(client.uptime / 3600000) % 24;

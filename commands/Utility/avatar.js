@@ -6,6 +6,7 @@ module.exports = {
     category: "Utility",
     description: "Get avatar user",
     usage: "[command | user] or [command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
 
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(x => x.user.username.toLowerCase() === args.slice(0).join(' ') || x.user.username === args[0]) || message.member;

@@ -7,6 +7,7 @@ module.exports = {
     category: "System",
     description: "Set avatar bot",
     usage: "[command +url]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
    let avatarurl = args.join(" ");
    if(message.author.id !== Admin) return message.channel.send('Insufficient permission!!')

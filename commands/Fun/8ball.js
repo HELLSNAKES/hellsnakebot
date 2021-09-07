@@ -5,6 +5,7 @@ module.exports = {
     category: "Fun",
     description: "Ask the bot a Question",
     usage: "[command] + [question]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
         const answers = [
             'It is certain.',

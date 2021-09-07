@@ -6,6 +6,7 @@ module.exports = {
   description: "starts a poll",
   timeout: 5000,
   usage: "[command] + [channel] + [question]",
+  author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         let channelID = message.mentions.channels.first()
         let theDescription = args.slice(1).join(" ")

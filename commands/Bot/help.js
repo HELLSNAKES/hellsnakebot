@@ -8,6 +8,7 @@ module.exports = {
     description: "Returns all commands, or one specific command info",
     timeout: 5000,
     usage: "[command | alias]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         if (args[0]) {
             return getCMD(client, message, args[0]);
@@ -56,6 +57,7 @@ function getCMD(client, message, input) {
     if (cmd.aliases)
         info += `\n**Aliases**: ${cmd.aliases.map((a) => `\`${a}\``).join(", ")}`;
     if (cmd.description) info += `\n**Description**: ${cmd.description}`;
+    if (cmd.author) info += `\n**Author**: ${cmd.author}`;
     if (cmd.usage) {
         info += `\n**Usage**: ${cmd.usage}`;
         embed.setFooter(`Syntax: <> = required, [] = optional`);

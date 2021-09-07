@@ -5,6 +5,7 @@ module.exports = {
     category: "Moderation",
     description: "announcement",
     usage: "[COMMAND] + [Channel] + [Text]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         if (!message.member.permissions.has('ADMINISTRATOR'))
         return message.channel.send(`Insufficient permission!!`);

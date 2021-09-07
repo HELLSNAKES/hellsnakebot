@@ -6,6 +6,7 @@ module.exports = {
 	description: "leave voice channel",
     timeout: 3000,
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
         const voiceChannel = message.member.voice.channel
         if (!voiceChannel) 

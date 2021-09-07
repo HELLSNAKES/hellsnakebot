@@ -7,6 +7,7 @@ module.exports = {
   description: "slap someone",
   usage: "[command]+[user]",
   timeout: 5000,
+  author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
   run: async(client, message, args) => {
     const member = message.mentions.members.first();
     if (!member)

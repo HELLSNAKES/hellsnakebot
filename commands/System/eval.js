@@ -6,6 +6,7 @@ module.exports = {
     category: "System",
     description: "Evaluates a JS string",
     usage: "[command] + [text]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         let command = args.slice(0).join(" ")
         if (message.author.id !== require('../../config.json').Admin) {

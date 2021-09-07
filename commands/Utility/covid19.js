@@ -6,6 +6,7 @@ module.exports = {
     category: "Utility",
     description: "Covid19 search",
     usage: "[command] + [countries]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
 		 const countries = args.join(" ");
          if(!countries) return message.channel.send('Usage [command]+[countries]')

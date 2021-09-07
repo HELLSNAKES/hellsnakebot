@@ -6,6 +6,7 @@ module.exports = {
     description: "Shows info about a server",
     timeout: 10000,
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async (client, message, args) => {
         const embed = new MessageEmbed()
             .setThumbnail(client.user.displayAvatarURL())

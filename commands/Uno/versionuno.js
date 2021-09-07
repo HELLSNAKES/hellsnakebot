@@ -6,6 +6,7 @@ module.exports = {
     category : "Uno",
     description : "check version",
     usage: "[command]",
+    author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
         await client.discordUNO.version.updates(message);
     }
