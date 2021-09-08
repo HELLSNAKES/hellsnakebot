@@ -5,6 +5,7 @@
 <p align="center">
     <img alt="Size" src="https://img.shields.io/github/languages/code-size/HELLSNAKES/hellsnakebot">
     <img alt="discord-ver" src="https://img.shields.io/badge/discord.js-v12.5.3-blue">
+    <img alt="database" src="https://img.shields.io/badge/database-mongodb-informational?style=flat&logo=mongodb&logoColor=white&color=blue">
     <img alt="Stars" src="https://img.shields.io/github/stars/HELLSNAKES/hellsnakebot">
     <img alt="Fork" src="https://img.shields.io/github/forks/HELLSNAKES/hellsnakebot">
     <img alt="License" src="https://img.shields.io/github/license/HELLSNAKES/hellsnakebot">
@@ -15,6 +16,7 @@
 2. Git: **[Link](https://git-scm.com)**
 3. Discord Bot Token: **[Link](https://discord.com/developers/applications)**
 4. OsuClientApi: **[Link](https://osu.ppy.sh/home/account/edit#new-oauth-application)**
+5. MongoDB Database's URI: **[Link](https://www.mongodb.com)**
 ## ⚙️Setting
 Note: Please run `install_tools.bat` (Windows) or `install_tools.sh` (Linux) if your machine's architecture isn't x64.
 ```
