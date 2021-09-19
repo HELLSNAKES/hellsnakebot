@@ -6,7 +6,7 @@ module.exports = {
     category: "Music",
     description: "play a song!",
     timeout: 3000,
-    usage: "[command]+[url] or [song name]",
+    usage: "[command]+[url youtube|soundcloud] or [song name]",
     author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run : async(client, message, args) => {
         if(!message.member.voice.channel) 
