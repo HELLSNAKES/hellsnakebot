@@ -146,7 +146,7 @@ const prefixSchema = require('./schemas/prefixcustoms')
 });
     const distube = require('distube');
     client.distube = new distube(client, { searchSongs: true, emitNewSongOnly: true, leaveOnEmpty: true, leaveOnFinish: true, updateYouTubeDL: false, youtubeCookie: config.youtubecookie })
-    const status = (queue) => `Volume: \`${queue.volume}%\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
+    const status = (queue) => `Volume: \`${queue.volume}%\` | Loop: \`${queue.repeatMode ? queue.repeatMode == 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\`| Filter: \`${queue.filter || "OFF"}\``;
     client.distube
       .on("playSong", (message, queue, song) => {
         const embed = new MessageEmbed()
