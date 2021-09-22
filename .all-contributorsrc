@@ -1,6 +1,6 @@
 {
   "projectName": "hellsnakebot",
-  "projectOwner": "hellsnakes",
+  "projectOwner": "HELLSNAKES",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -44,7 +44,17 @@
         "projectManagement",
         "test"
       ]
+    },
+    {
+      "login": "meimeiowo",
+      "name": "meimei",
+      "avatar_url": "https://avatars.githubusercontent.com/u/91164564?v=4",
+      "profile": "https://github.com/meimeiowo",
+      "contributions": [
+        "design"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
