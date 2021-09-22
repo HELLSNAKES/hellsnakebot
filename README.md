@@ -11,6 +11,10 @@
     <img alt="License" src="https://img.shields.io/github/license/HELLSNAKES/hellsnakebot">
 </p>
 
+## 🎉 Update 
+> Bot is being rewritten for v13
+>
+> Discord.js v13 will not be used for this repositories as it will break bots
 ## 💻 Requirements
 1. Nodejs>=14: **[Link](https://nodejs.org)**
 2. Git: **[Link](https://git-scm.com)**
