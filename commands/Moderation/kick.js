@@ -7,7 +7,7 @@ module.exports = {
     usage: "[command]+[reason]+[user]",
     author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
     run: async(client, message, args) => {
-        const member = message.mentions.members.first()
+        const member = message.mentions.members.last()
         const reason = args.slice(1).join(" ")
 
         if(!message.member.hasPermission('KICK_MEMBERS')) {

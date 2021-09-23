@@ -9,7 +9,7 @@ module.exports = {
   timeout: 5000,
   author: "[CuSO4-c3c,Hiyoriii,Hellsnakes]",
   run: async(client, message, args) => {
-    const member = message.mentions.members.first();
+    const member = message.mentions.members.last();
     if (!member)
       return message.channel.send(`Who do you want to pat??`)
     let url = await neko.sfw.pat()

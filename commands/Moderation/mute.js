@@ -11,7 +11,7 @@ module.exports = {
             return message.channel.send(`Insufficient permission!!`);
         if(!message.guild.me.hasPermission("MANAGE_MESSAGES"))
             return message.channel.send(`I dont have permissions to mute`);
-        const Member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+        const Member = message.mentions.members.last() || message.guild.members.cache.get(args[0])
         if(!Member) return message.channel.send('Please mention a user!')
         const role = message.guild.roles.cache.find(role => role.name.toLowerCase() === 'muted')
         if(!role) {
@@ -36,7 +36,7 @@ module.exports = {
                 console.log(error)
                 message.channel.send(error)
             }
-        };
+        }
         let role2 = message.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted')
         if(Member.roles.cache.has(role2.id)) return message.channel.send(`${Member.displayName} has already been muted.`)
         await Member.roles.add(role2)
