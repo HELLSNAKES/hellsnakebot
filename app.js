@@ -88,10 +88,11 @@ const main = async () => {
     client.on("message", async message => {
       const prefixes = await client.prefix(message)
       if(message.content.includes(`<@!${config.Admin}>`)) message.reply('Tag ad bo may cc dmm')
-      if (message.content == `<@!${client.user.id}>`) {
-        message.reply(`**Use ${prefixes}help to display all commands available.**`);
+      if (message.content == `<@!${client.user.id}>` || message.content == `<@${client.user.id}>`) {
+        return message.reply(`**Use ${prefixes}help to display all commands available.**`);
       } else {
-        if((!message.content.startsWith(`<@!${client.user.id}>`) || !message.content.startsWith(`<@${client.user.id}>`)) && (message.content.includes(`<@!${client.user.id}>`) || message.content.includes(`<@${client.user.id}>`))) message.reply(`**Use ${prefixes}help to display all commands available.**`);
+        if(!message.content.startsWith(`<@!${client.user.id}>`) && message.content.includes(`<@!${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
+        if(!message.content.startsWith(`<@${client.user.id}>`) && message.content.includes(`<@${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
       }
       if (config.loglevel == 'message') {
         if (message.content.startsWith(prefixes) && message.content.startsWith(`<@!${client.user.id}>`)) {
@@ -120,9 +121,14 @@ const main = async () => {
       }
       if (message.author.bot) return;
       if (!message.guild) return;
-      if (!message.content.startsWith(prefixes) && !message.content.startsWith(`<@!${client.user.id}>` && !message.content.startsWith(`<@${client.user.id}>`))) return;
+      console.log(!message.content.startsWith(prefixes) && (!message.content.startsWith(`<@!${client.user.id}>` || !message.content.startsWith(`<@${client.user.id}>`))))
+      if (!message.content.startsWith(prefixes)) { 
+        if(!message.content.startsWith(`<@!${client.user.id}>`))
+        if(!message.content.startsWith(`<@${client.user.id}>`)) return;
+      }
       if (!message.member) message.member = await message.guild.fetchMember(message);
       const args = message.content.trim().split(/ +/g);
+      //console.log(args)
       var cmd;
       var a = args.shift();
       if (a == `<@!${client.user.id}>` || a == `<@${client.user.id}>`) {
@@ -131,6 +137,7 @@ const main = async () => {
       } else {
         cmd = a.toLowerCase().replace(`<@!${client.user.id}>`, '').replace(`<@${client.user.id}>`, '').replace(prefixes, '');
       }
+      //console.log(args,cmd)
       if (cmd.length === 0) return;
       let command = client.commands.get(cmd);
       if (!command) command = client.commands.get(client.aliases.get(cmd));
