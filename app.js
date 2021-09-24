@@ -91,7 +91,7 @@ const main = async () => {
       if (message.content == `<@!${client.user.id}>`) {
         message.reply(`**Use ${prefixes}help to display all commands available.**`);
       } else {
-        if(!message.content.startsWith(`<@!${client.user.id}>`) && message.content.includes(`<@!${client.user.id}>`)) message.reply(`**Use ${prefixes}help to display all commands available.**`);
+        if((!message.content.startsWith(`<@!${client.user.id}>`) || !message.content.startsWith(`<@${client.user.id}>`)) && (message.content.includes(`<@!${client.user.id}>`) || message.content.includes(`<@${client.user.id}>`))) message.reply(`**Use ${prefixes}help to display all commands available.**`);
       }
       if (config.loglevel == 'message') {
         if (message.content.startsWith(prefixes) && message.content.startsWith(`<@!${client.user.id}>`)) {
@@ -120,16 +120,16 @@ const main = async () => {
       }
       if (message.author.bot) return;
       if (!message.guild) return;
-      if (!message.content.startsWith(prefixes) && !message.content.startsWith(`<@!${client.user.id}>`)) return;
+      if (!message.content.startsWith(prefixes) && !message.content.startsWith(`<@!${client.user.id}>` && !message.content.startsWith(`<@${client.user.id}>`))) return;
       if (!message.member) message.member = await message.guild.fetchMember(message);
       const args = message.content.trim().split(/ +/g);
       var cmd;
       var a = args.shift();
-      if (a == `<@!${client.user.id}>`) {
+      if (a == `<@!${client.user.id}>` || a == `<@${client.user.id}>`) {
         cmd = args[0]
         args.shift();
       } else {
-        cmd = a.toLowerCase().replace(`<@!${client.user.id}>`, '').replace(prefixes, '');
+        cmd = a.toLowerCase().replace(`<@!${client.user.id}>`, '').replace(`<@${client.user.id}>`, '').replace(prefixes, '');
       }
       if (cmd.length === 0) return;
       let command = client.commands.get(cmd);
