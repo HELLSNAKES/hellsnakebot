@@ -12,7 +12,7 @@ module.exports = {
         if (config.oauthv2link == '') {
             return message.channel.send('Missing `oauthv2link` in config.json.')
         } else {
-            if (!config.oauthv2link.toString().startsWith('https://discord.com/oauth2/authorize')) {
+            if (!config.oauthv2link.toString().startsWith('https://discord.com/')) {
                 return message.channel.send('Please provides a vaild OAuth2 link.')
             } else {
                 /*

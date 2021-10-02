@@ -69,7 +69,7 @@ const main = async () => {
       // Database Connect
       mongoose.connect(config.mongoPath, { useUnifiedTopology: true, useNewUrlParser: true })
         .then(() => console.log('\x1b[33m%s\x1b[0m', `Connected to Mongo`))
-        .catch((error) => {console.log(error)});
+        .catch((error) => { console.log(error) });
     });
     const prefixSchema = require('./schemas/prefixcustoms')
     client.prefix = async function (message) {
@@ -91,8 +91,8 @@ const main = async () => {
       if (message.content == `<@!${client.user.id}>` || message.content == `<@${client.user.id}>`) {
         return message.reply(`**Use ${prefixes}help to display all commands available.**`);
       } else {
-        if(!message.content.startsWith(`<@!${client.user.id}>`) && message.content.includes(`<@!${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
-        if(!message.content.startsWith(`<@${client.user.id}>`) && message.content.includes(`<@${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
+        if (!message.content.startsWith(`<@!${client.user.id}>`) && message.content.includes(`<@!${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
+        if (!message.content.startsWith(`<@${client.user.id}>`) && message.content.includes(`<@${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
       }
       if (config.loglevel == 'message') {
         if (message.content.startsWith(prefixes) && message.content.startsWith(`<@!${client.user.id}>`)) {
@@ -122,9 +122,9 @@ const main = async () => {
       if (message.author.bot) return;
       if (!message.guild) return;
       console.log(!message.content.startsWith(prefixes) && (!message.content.startsWith(`<@!${client.user.id}>` || !message.content.startsWith(`<@${client.user.id}>`))))
-      if (!message.content.startsWith(prefixes)) { 
-        if(!message.content.startsWith(`<@!${client.user.id}>`))
-        if(!message.content.startsWith(`<@${client.user.id}>`)) return;
+      if (!message.content.startsWith(prefixes)) {
+        if (!message.content.startsWith(`<@!${client.user.id}>`))
+          if (!message.content.startsWith(`<@${client.user.id}>`)) return;
       }
       if (!message.member) message.member = await message.guild.fetchMember(message);
       const args = message.content.trim().split(/ +/g);
@@ -176,15 +176,27 @@ const main = async () => {
           .setColor("RANDOM")
         message.channel.send(embed);
       })
-      .on("playList", (message, queue, playlist, song) => message.channel.send(
-        `Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\`\n${status(queue)}`,
-      ))
-      .on("addList", (message, queue, playlist) => message.channel.send(
-        `Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`,
-      ))
+      .on("playList", (message, queue, playlist, song) => {
+        const embed = new MessageEmbed()
+          .setTitle(`🎵 PlayList`)
+          .setDescription(`Play \`${playlist.name}\` playlist (${playlist.songs.length} songs).\nRequested by: ${song.user}\nNow playing \`${song.name}\` - \`${song.formattedDuration}\`\n${status(queue)}`)
+        message.channel.send(embed)
+      })
+      .on("addList", (message, queue, playlist) => {
+        const embed = new MessageEmbed()
+          .setTitle(`<:addsong:879518595665780746> Add list`)
+          .setDescription(`Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`)
+          .setColor("RANDOM")
+        message.channel.send(embed);
+      })
       .on("searchResult", (message, result) => {
         let i = 0;
-        message.channel.send(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`);
+        const embed = new MessageEmbed()
+          .setTitle('Choose an option from below')
+          .setDescription(`${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}`)
+          .setColor("RED")
+          .setFooter('*Enter anything else or wait 60 seconds to cancel*')
+        message.channel.send(embed).then(embed => { embed.delete({ timeout: 61000 }) })
       })
       .on("searchCancel", (message) => message.channel.send(`***Searching canceled***`))
       .on('error', (message, e) => {
