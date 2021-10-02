@@ -87,7 +87,7 @@ const main = async () => {
     }
     client.on("message", async message => {
       const prefixes = await client.prefix(message)
-      if(message.content.includes(`<@!${config.Admin}>`)) message.reply('Tag ad bo may cc dmm')
+      if(message.content.includes(`<@!${config.Admin}>`)) if(!message.author.id == client.user.id) message.reply('Tag ad bo may cc dmm')
       if (message.content == `<@!${client.user.id}>` || message.content == `<@${client.user.id}>`) {
         return message.reply(`**Use ${prefixes}help to display all commands available.**`);
       } else {
