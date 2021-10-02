@@ -26,6 +26,13 @@ module.exports = {
     run: async (client, message, args) => {
         if (!message.member.voice.channel)
             return message.reply('Please join a voice channel!')
+        let queue = client.distube.getQueue(message);
+        if (!queue) {
+            const queueError = new Discord.MessageEmbed()
+                .setDescription("There is Nothing Playing")
+                .setColor("RANDOM")
+            return message.channel.send(queueError)
+        }
         if (filters.includes(args[0])) {
             const filter = client.distube.setFilter(message, args[0]);
             await message.react('👌')

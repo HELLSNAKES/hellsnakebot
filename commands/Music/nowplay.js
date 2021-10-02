@@ -11,9 +11,12 @@ module.exports = {
     run: async (client, message, args) => {
         if (!message.member.voice.channel)
             return message.reply('Please join a voice channel!')
-        const queue = client.distube.getQueue(message)
+        let queue = client.distube.getQueue(message);
         if (!queue) {
-            return message.reply(`There are currently no songs`);
+            const queueError = new Discord.MessageEmbed()
+                .setDescription("There is Nothing Playing")
+                .setColor("RANDOM")
+            return message.channel.send(queueError)
         }
         const song = queue.songs[0]
         const embed = new Discord.MessageEmbed()
