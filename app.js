@@ -1,4 +1,4 @@
-const { Client, Collection, MessageEmbed } = require("discord.js");
+const { Client, Collection, MessageEmbed, Message } = require("discord.js");
 const { DiscordUNO } = require("discord-uno");
 const fs = require("fs");
 const childProcess = require('child_process')
@@ -48,7 +48,7 @@ const main = async () => {
     client.commands = new Collection();
     client.aliases = new Collection();
     client.categories = fs.readdirSync("./commands/");
-    ["command"].forEach(handler => {
+    fs.readdirSync('./handlers').forEach(handler => {
       require(`./handlers/${handler}`)(client);
     });
     client.on('ready', () => {
@@ -87,12 +87,12 @@ const main = async () => {
     }
     client.on("message", async message => {
       const prefixes = await client.prefix(message)
-      if(message.content.includes(`<@!${config.Admin}>`)) if(!message.author.id == client.user.id) message.reply('Tag ad bo may cc dmm')
+      if (message.content.includes(`<@!${config.Admin}>`)) if (!message.author.id == client.user.id) message.reply('Tag ad bo may cc dmm')
       if (message.content == `<@!${client.user.id}>` || message.content == `<@${client.user.id}>`) {
         return message.reply(`**Use ${prefixes}help to display all commands available.**`);
       } else {
-        if (!message.content.startsWith(`<@!${client.user.id}>`) && message.content.includes(`<@!${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
-        if (!message.content.startsWith(`<@${client.user.id}>`) && message.content.includes(`<@${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
+        if (!message.content.startsWith(config.prefix) && !message.content.startsWith(`<@!${client.user.id}>`) && message.content.includes(`<@!${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
+        if (!message.content.startsWith(config.prefix) &&!message.content.startsWith(`<@${client.user.id}>`) && message.content.includes(`<@${client.user.id}>`)) return message.reply(`**Use ${prefixes}help to display all commands available.**`);
       }
       if (config.loglevel == 'message') {
         if (message.content.startsWith(prefixes) && message.content.startsWith(`<@!${client.user.id}>`)) {
@@ -121,7 +121,7 @@ const main = async () => {
       }
       if (message.author.bot) return;
       if (!message.guild) return;
-      console.log(!message.content.startsWith(prefixes) && (!message.content.startsWith(`<@!${client.user.id}>` || !message.content.startsWith(`<@${client.user.id}>`))))
+      //console.log(!message.content.startsWith(prefixes) && (!message.content.startsWith(`<@!${client.user.id}>` || !message.content.startsWith(`<@${client.user.id}>`))))
       if (!message.content.startsWith(prefixes)) {
         if (!message.content.startsWith(`<@!${client.user.id}>`))
           if (!message.content.startsWith(`<@${client.user.id}>`)) return;
