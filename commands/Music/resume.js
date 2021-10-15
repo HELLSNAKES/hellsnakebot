@@ -12,6 +12,9 @@ module.exports = {
         if (!message.member.voice.channel)
             return message.reply('Please join a voice channel!');
         let queue = client.distube.getQueue(message);
+        if (message.member.guild.me.voice.channel.id !== message.member.voice.channel.id) {
+            return message.reply('You are not on the same voice channel as me!');
+        }
         if (!queue) {
             const queueError = new Discord.MessageEmbed()
                 .setDescription("There is Nothing Playing")
